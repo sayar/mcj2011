@@ -1,0 +1,13 @@
+Code Jam at McGill 2011
+--------------------
+
+The Code Jam at McGill is a yearly programming competition in which student programmers are asked to develop a solution to a real-life problem in 48 hours fueled by pizza and red bull, using the programming language and platform of their choice.
+
+http://mcgillcodejam.com
+
+This repository contains the specification, the broker source code, the order examples and the sms web application used for testing. It was developed by teams from our sponsoring company as well as the Code Jam organization committee.
+
+* Precompiled binary 
+
+A precompiled jar (broker.jar) is available in spec/ directory. Please consult the README.HTM in that
+directory for instructions on how to run. 

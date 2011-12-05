@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title>Send Order to Exchange</title>
+</head>
+
+<body>
+<form name="input" METHOD="post" ACTION="http://pasdb40:8080/exchange/endpoint" >
+
+<p>
+	
+Use this page to submit an order directly to your exchange. Edit the ACTION url 
+to match the address and port of your exchange. This page can be useful when 
+used with Firefox and the Firebug plugin to see exactly how your exchange 
+responds to an order message. Make sure to activate the Net and Console options 
+in Firebug. 
+
+</p>
+
+<table>
+	
+<tr><td>Message Type:</td><td> <input type="text" name="MessageType" value="O" /> </td> </tr>
+<tr><td>From:</td><td><input type="text" name="From" value="+5145551212"/></td></tr>
+<tr><td>Buy/Sell:</td><td> <input type="text" name="BS" value="B"/></td></tr>
+<tr><td>Shares:</td><td> <input type="text" name="Shares" value="100"/></td></tr>
+<tr><td>Stock:</td><td> <input type="text" name="Stock" value="XYZ"/></td></tr>
+<tr><td>Price:</td><td> <input type="text" name="Price" value="1000"/></td></tr>
+<tr><td>Twilio:</td><td> <input type="text" name="Twilio" value="N"/></td></tr>
+<tr><td>Broker Address:</td><td> <input type="text" name="BrokerAddress" value="10.193.247.78"/></td></tr>
+<tr><td>Broker Port:</td><td> <input type="text" name="BrokerPort" value="9999"/></td></tr>
+<tr><td>End Point:</td><td> <input type="text" name="BrokerEndpoint" value="/broker"/></td></tr>
+</table>	
+
+
+<input type="submit" value="Submit" />
+</form> 
+
+</body>
+
+</html> 
+
+
+

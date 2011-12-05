@@ -1,0 +1,1658 @@
+
+TIME STAMP: 900001
+Comment:    Order B1 Buy 50 @ 91.00
+ -------------- ORDER BOOK -----------------------
+ Order Ref Id          Time     Stock Sym        Filled      Buy/Sell        Amount         Price        Parent 
+           B1        900001           XYZ             U           BUY            50          9100          NULL
+ -------------- Executions -----------------------
+ Match Number          Time     Stock Sym           Buy          Sell        Amount         Price 
+
+TIME STAMP: 900002
+Comment:    Order B2 Buy 150 @ 91.00
+ -------------- ORDER BOOK -----------------------
+ Order Ref Id          Time     Stock Sym        Filled      Buy/Sell        Amount         Price        Parent 
+           B1        900001           XYZ             U           BUY            50          9100          NULL
+           B2        900002           XYZ             U           BUY           150          9100          NULL
+ -------------- Executions -----------------------
+ Match Number          Time     Stock Sym           Buy          Sell        Amount         Price 
+
+TIME STAMP: 900003
+Comment:    Order B3 Buy 100 @ 92.00
+ -------------- ORDER BOOK -----------------------
+ Order Ref Id          Time     Stock Sym        Filled      Buy/Sell        Amount         Price        Parent 
+           B1        900001           XYZ             U           BUY            50          9100          NULL
+           B2        900002           XYZ             U           BUY           150          9100          NULL
+           B3        900003           XYZ             U           BUY           100          9200          NULL
+ -------------- Executions -----------------------
+ Match Number          Time     Stock Sym           Buy          Sell        Amount         Price 
+
+TIME STAMP: 900004
+Comment:    Order S1 Sell 200 @ 90.00 Generate three executions and residual for B2. Note the sell price is lower than the buy price. We still have a match. The converse is not true however: a sell price higher than a buy price is not a match !!
+ -------------- ORDER BOOK -----------------------
+ Order Ref Id          Time     Stock Sym        Filled      Buy/Sell        Amount         Price        Parent 
+           B1        900001           XYZ             F           BUY            50          9100          NULL
+           B2        900002           XYZ             F           BUY           150          9100          NULL
+           B3        900003           XYZ             F           BUY           100          9200          NULL
+           S1        900004           XYZ             F          SELL           200          9000          NULL
+       3a3b68        900004           XYZ             U           BUY           100          9100            B2
+ -------------- Executions -----------------------
+ Match Number          Time     Stock Sym           Buy          Sell        Amount         Price 
+            0        900004           XYZ            B3            S1           100          9000 
+            1        900004           XYZ            B1            S1            50          9000 
+            2        900004           XYZ            B2            S1            50          9000 
+
+TIME STAMP: 900005
+Comment:    Order S2 Sell 200 @ 90.00 Generate 1 execution and a residual from this order
+ -------------- ORDER BOOK -----------------------
+ Order Ref Id          Time     Stock Sym        Filled      Buy/Sell        Amount         Price        Parent 
+           B1        900001           XYZ             F           BUY            50          9100          NULL
+           B2        900002           XYZ             F           BUY           150          9100          NULL
+           B3        900003           XYZ             F           BUY           100          9200          NULL
+           S1        900004           XYZ             F          SELL           200          9000          NULL
+       3a3b68        900004           XYZ             F           BUY           100          9100            B2
+           S2        900005           XYZ             F          SELL           200          9000          NULL
+       3a3e30        900005           XYZ             U          SELL           100          9000            S2
+ -------------- Executions -----------------------
+ Match Number          Time     Stock Sym           Buy          Sell        Amount         Price 
+            0        900004           XYZ            B3            S1           100          9000 
+            1        900004           XYZ            B1            S1            50          9000 
+            2        900004           XYZ            B2            S1            50          9000 
+            3        900005           XYZ        3a3b68            S2           100          9000 
+
+TIME STAMP: 900006
+Comment:    Order B4 Buy 100 @ 92.00 This order will fill the residual from S2.
+ -------------- ORDER BOOK -----------------------
+ Order Ref Id          Time     Stock Sym        Filled      Buy/Sell        Amount         Price        Parent 
+           B1        900001           XYZ             F           BUY            50          9100          NULL
+           B2        900002           XYZ             F           BUY           150          9100          NULL
+           B3        900003           XYZ             F           BUY           100          9200          NULL
+           S1        900004           XYZ             F          SELL           200          9000          NULL
+       3a3b68        900004           XYZ             F           BUY           100          9100            B2
+           S2        900005           XYZ             F          SELL           200          9000          NULL
+       3a3e30        900005           XYZ             F          SELL           100          9000            S2
+           B4        900006           XYZ             F           BUY           100          9200          NULL
+ -------------- Executions -----------------------
+ Match Number          Time     Stock Sym           Buy          Sell        Amount         Price 
+            0        900004           XYZ            B3            S1           100          9000 
+            1        900004           XYZ            B1            S1            50          9000 
+            2        900004           XYZ            B2            S1            50          9000 
+            3        900005           XYZ        3a3b68            S2           100          9000 
+            4        900006           XYZ            B4        3a3e30           100          9000 
+
+TIME STAMP: 900007
+Comment:    Order B5 Buy 100 @ 92.00 
+ -------------- ORDER BOOK -----------------------
+ Order Ref Id          Time     Stock Sym        Filled      Buy/Sell        Amount         Price        Parent 
+           B1        900001           XYZ             F           BUY            50          9100          NULL
+           B2        900002           XYZ             F           BUY           150          9100          NULL
+           B3        900003           XYZ             F           BUY           100          9200          NULL
+           S1        900004           XYZ             F          SELL           200          9000          NULL
+       3a3b68        900004           XYZ             F           BUY           100          9100            B2
+           S2        900005           XYZ             F          SELL           200          9000          NULL
+       3a3e30        900005           XYZ             F          SELL           100          9000            S2
+           B4        900006           XYZ             F           BUY           100          9200          NULL
+           B5        900007           XYZ             U           BUY           100          9200          NULL
+ -------------- Executions -----------------------
+ Match Number          Time     Stock Sym           Buy          Sell        Amount         Price 
+            0        900004           XYZ            B3            S1           100          9000 
+            1        900004           XYZ            B1            S1            50          9000 
+            2        900004           XYZ            B2            S1            50          9000 
+            3        900005           XYZ        3a3b68            S2           100          9000 
+            4        900006           XYZ            B4        3a3e30           100          9000 
+
+TIME STAMP: 900008
+Comment:    Order B6 Buy 100 @ 92.00 
+ -------------- ORDER BOOK -----------------------
+ Order Ref Id          Time     Stock Sym        Filled      Buy/Sell        Amount         Price        Parent 
+           B1        900001           XYZ             F           BUY            50          9100          NULL
+           B2        900002           XYZ             F           BUY           150          9100          NULL
+           B3        900003           XYZ             F           BUY           100          9200          NULL
+           S1        900004           XYZ             F          SELL           200          9000          NULL
+       3a3b68        900004           XYZ             F           BUY           100          9100            B2
+           S2        900005           XYZ             F          SELL           200          9000          NULL
+       3a3e30        900005           XYZ             F          SELL           100          9000            S2
+           B4        900006           XYZ             F           BUY           100          9200          NULL
+           B5        900007           XYZ             U           BUY           100          9200          NULL
+           B6        900008           XYZ             U           BUY           100          9200          NULL
+ -------------- Executions -----------------------
+ Match Number          Time     Stock Sym           Buy          Sell        Amount         Price 
+            0        900004           XYZ            B3            S1           100          9000 
+            1        900004           XYZ            B1            S1            50          9000 
+            2        900004           XYZ            B2            S1            50          9000 
+            3        900005           XYZ        3a3b68            S2           100          9000 
+            4        900006           XYZ            B4        3a3e30           100          9000 
+
+TIME STAMP: 900009
+Comment:    Order S3 Buy 50 @ 92.00. Will match B5 and create residual.
+ -------------- ORDER BOOK -----------------------
+ Order Ref Id          Time     Stock Sym        Filled      Buy/Sell        Amount         Price        Parent 
+           B1        900001           XYZ             F           BUY            50          9100          NULL
+           B2        900002           XYZ             F           BUY           150          9100          NULL
+           B3        900003           XYZ             F           BUY           100          9200          NULL
+           S1        900004           XYZ             F          SELL           200          9000          NULL
+       3a3b68        900004           XYZ             F           BUY           100          9100            B2
+           S2        900005           XYZ             F          SELL           200          9000          NULL
+       3a3e30        900005           XYZ             F          SELL           100          9000            S2
+           B4        900006           XYZ             F           BUY           100          9200          NULL
+           B5        900007           XYZ             F           BUY           100          9200          NULL
+           B6        900008           XYZ             U           BUY           100          9200          NULL
+           S3        900009           XYZ             F          SELL            50          9200          NULL
+       3a4140        900009           XYZ             U           BUY            50          9200            B5
+ -------------- Executions -----------------------
+ Match Number          Time     Stock Sym           Buy          Sell        Amount         Price 
+            0        900004           XYZ            B3            S1           100          9000 
+            1        900004           XYZ            B1            S1            50          9000 
+            2        900004           XYZ            B2            S1            50          9000 
+            3        900005           XYZ        3a3b68            S2           100          9000 
+            4        900006           XYZ            B4        3a3e30           100          9000 
+            5        900009           XYZ            B5            S3            50          9200 
+
+TIME STAMP: 900010
+Comment:    Order S4 Buy 50 @ 92.00. Will match residual of B5.
+ -------------- ORDER BOOK -----------------------
+ Order Ref Id          Time     Stock Sym        Filled      Buy/Sell        Amount         Price        Parent 
+           B1        900001           XYZ             F           BUY            50          9100          NULL
+           B2        900002           XYZ             F           BUY           150          9100          NULL
+           B3        900003           XYZ             F           BUY           100          9200          NULL
+           S1        900004           XYZ             F          SELL           200          9000          NULL
+       3a3b68        900004           XYZ             F           BUY           100          9100            B2
+           S2        900005           XYZ             F          SELL           200          9000          NULL
+       3a3e30        900005           XYZ             F          SELL           100          9000            S2
+           B4        900006           XYZ             F           BUY           100          9200          NULL
+           B5        900007           XYZ             F           BUY           100          9200          NULL
+           B6        900008           XYZ             U           BUY           100          9200          NULL
+           S3        900009           XYZ             F          SELL            50          9200          NULL
+       3a4140        900009           XYZ             F           BUY            50          9200            B5
+           S4        900010           XYZ             F          SELL            50          9200          NULL
+ -------------- Executions -----------------------
+ Match Number          Time     Stock Sym           Buy          Sell        Amount         Price 
+            0        900004           XYZ            B3            S1           100          9000 
+            1        900004           XYZ            B1            S1            50          9000 
+            2        900004           XYZ            B2            S1            50          9000 
+            3        900005           XYZ        3a3b68            S2           100          9000 
+            4        900006           XYZ            B4        3a3e30           100          9000 
+            5        900009           XYZ            B5            S3            50          9200 
+            6        900010           XYZ        3a4140            S4            50          9200 
+
+TIME STAMP: 900011
+Comment:    Order S5 Buy 100 @ 92.00. Will match B6.
+ -------------- ORDER BOOK -----------------------
+ Order Ref Id          Time     Stock Sym        Filled      Buy/Sell        Amount         Price        Parent 
+           B1        900001           XYZ             F           BUY            50          9100          NULL
+           B2        900002           XYZ             F           BUY           150          9100          NULL
+           B3        900003           XYZ             F           BUY           100          9200          NULL
+           S1        900004           XYZ             F          SELL           200          9000          NULL
+       3a3b68        900004           XYZ             F           BUY           100          9100            B2
+           S2        900005           XYZ             F          SELL           200          9000          NULL
+       3a3e30        900005           XYZ             F          SELL           100          9000            S2
+           B4        900006           XYZ             F           BUY           100          9200          NULL
+           B5        900007           XYZ             F           BUY           100          9200          NULL
+           B6        900008           XYZ             F           BUY           100          9200          NULL
+           S3        900009           XYZ             F          SELL            50          9200          NULL
+       3a4140        900009           XYZ             F           BUY            50          9200            B5
+           S4        900010           XYZ             F          SELL            50          9200          NULL
+           S5        900011           XYZ             F          SELL           100          9200          NULL
+ -------------- Executions -----------------------
+ Match Number          Time     Stock Sym           Buy          Sell        Amount         Price 
+            0        900004           XYZ            B3            S1           100          9000 
+            1        900004           XYZ            B1            S1            50          9000 
+            2        900004           XYZ            B2            S1            50          9000 
+            3        900005           XYZ        3a3b68            S2           100          9000 
+            4        900006           XYZ            B4        3a3e30           100          9000 
+            5        900009           XYZ            B5            S3            50          9200 
+            6        900010           XYZ        3a4140            S4            50          9200 
+            7        900011           XYZ            B6            S5           100          9200 
+
+TIME STAMP: 900012
+Comment:    Order S7 Sell 50 @ 90.00
+ -------------- ORDER BOOK -----------------------
+ Order Ref Id          Time     Stock Sym        Filled      Buy/Sell        Amount         Price        Parent 
+           B1        900001           XYZ             F           BUY            50          9100          NULL
+           B2        900002           XYZ             F           BUY           150          9100          NULL
+           B3        900003           XYZ             F           BUY           100          9200          NULL
+           S1        900004           XYZ             F          SELL           200          9000          NULL
+       3a3b68        900004           XYZ             F           BUY           100          9100            B2
+           S2        900005           XYZ             F          SELL           200          9000          NULL
+       3a3e30        900005           XYZ             F          SELL           100          9000            S2
+           B4        900006           XYZ             F           BUY           100          9200          NULL
+           B5        900007           XYZ             F           BUY           100          9200          NULL
+           B6        900008           XYZ             F           BUY           100          9200          NULL
+           S3        900009           XYZ             F          SELL            50          9200          NULL
+       3a4140        900009           XYZ             F           BUY            50          9200            B5
+           S4        900010           XYZ             F          SELL            50          9200          NULL
+           S5        900011           XYZ             F          SELL           100          9200          NULL
+           S7        900012           XYZ             U          SELL            50          9000          NULL
+ -------------- Executions -----------------------
+ Match Number          Time     Stock Sym           Buy          Sell        Amount         Price 
+            0        900004           XYZ            B3            S1           100          9000 
+            1        900004           XYZ            B1            S1            50          9000 
+            2        900004           XYZ            B2            S1            50          9000 
+            3        900005           XYZ        3a3b68            S2           100          9000 
+            4        900006           XYZ            B4        3a3e30           100          9000 
+            5        900009           XYZ            B5            S3            50          9200 
+            6        900010           XYZ        3a4140            S4            50          9200 
+            7        900011           XYZ            B6            S5           100          9200 
+
+TIME STAMP: 900013
+Comment:    Order S8 Sell 150 @ 90.00
+ -------------- ORDER BOOK -----------------------
+ Order Ref Id          Time     Stock Sym        Filled      Buy/Sell        Amount         Price        Parent 
+           B1        900001           XYZ             F           BUY            50          9100          NULL
+           B2        900002           XYZ             F           BUY           150          9100          NULL
+           B3        900003           XYZ             F           BUY           100          9200          NULL
+           S1        900004           XYZ             F          SELL           200          9000          NULL
+       3a3b68        900004           XYZ             F           BUY           100          9100            B2
+           S2        900005           XYZ             F          SELL           200          9000          NULL
+       3a3e30        900005           XYZ             F          SELL           100          9000            S2
+           B4        900006           XYZ             F           BUY           100          9200          NULL
+           B5        900007           XYZ             F           BUY           100          9200          NULL
+           B6        900008           XYZ             F           BUY           100          9200          NULL
+           S3        900009           XYZ             F          SELL            50          9200          NULL
+       3a4140        900009           XYZ             F           BUY            50          9200            B5
+           S4        900010           XYZ             F          SELL            50          9200          NULL
+           S5        900011           XYZ             F          SELL           100          9200          NULL
+           S7        900012           XYZ             U          SELL            50          9000          NULL
+           S8        900013           XYZ             U          SELL           150          9000          NULL
+ -------------- Executions -----------------------
+ Match Number          Time     Stock Sym           Buy          Sell        Amount         Price 
+            0        900004           XYZ            B3            S1           100          9000 
+            1        900004           XYZ            B1            S1            50          9000 
+            2        900004           XYZ            B2            S1            50          9000 
+            3        900005           XYZ        3a3b68            S2           100          9000 
+            4        900006           XYZ            B4        3a3e30           100          9000 
+            5        900009           XYZ            B5            S3            50          9200 
+            6        900010           XYZ        3a4140            S4            50          9200 
+            7        900011           XYZ            B6            S5           100          9200 
+
+TIME STAMP: 900014
+Comment:    Order S9 Sell 100 @ 89.00
+ -------------- ORDER BOOK -----------------------
+ Order Ref Id          Time     Stock Sym        Filled      Buy/Sell        Amount         Price        Parent 
+           B1        900001           XYZ             F           BUY            50          9100          NULL
+           B2        900002           XYZ             F           BUY           150          9100          NULL
+           B3        900003           XYZ             F           BUY           100          9200          NULL
+           S1        900004           XYZ             F          SELL           200          9000          NULL
+       3a3b68        900004           XYZ             F           BUY           100          9100            B2
+           S2        900005           XYZ             F          SELL           200          9000          NULL
+       3a3e30        900005           XYZ             F          SELL           100          9000            S2
+           B4        900006           XYZ             F           BUY           100          9200          NULL
+           B5        900007           XYZ             F           BUY           100          9200          NULL
+           B6        900008           XYZ             F           BUY           100          9200          NULL
+           S3        900009           XYZ             F          SELL            50          9200          NULL
+       3a4140        900009           XYZ             F           BUY            50          9200            B5
+           S4        900010           XYZ             F          SELL            50          9200          NULL
+           S5        900011           XYZ             F          SELL           100          9200          NULL
+           S7        900012           XYZ             U          SELL            50          9000          NULL
+           S8        900013           XYZ             U          SELL           150          9000          NULL
+           S9        900014           XYZ             U          SELL           100          8900          NULL
+ -------------- Executions -----------------------
+ Match Number          Time     Stock Sym           Buy          Sell        Amount         Price 
+            0        900004           XYZ            B3            S1           100          9000 
+            1        900004           XYZ            B1            S1            50          9000 
+            2        900004           XYZ            B2            S1            50          9000 
+            3        900005           XYZ        3a3b68            S2           100          9000 
+            4        900006           XYZ            B4        3a3e30           100          9000 
+            5        900009           XYZ            B5            S3            50          9200 
+            6        900010           XYZ        3a4140            S4            50          9200 
+            7        900011           XYZ            B6            S5           100          9200 
+
+TIME STAMP: 900015
+Comment:    Order B7 Buy 200 @ 92.00 Generate three executions and residual for S8. Note the sell price is lower than the buy price. We still have a match. The converse is not true however: a sell price higher than a buy price is not a match !!
+ -------------- ORDER BOOK -----------------------
+ Order Ref Id          Time     Stock Sym        Filled      Buy/Sell        Amount         Price        Parent 
+           B1        900001           XYZ             F           BUY            50          9100          NULL
+           B2        900002           XYZ             F           BUY           150          9100          NULL
+           B3        900003           XYZ             F           BUY           100          9200          NULL
+           S1        900004           XYZ             F          SELL           200          9000          NULL
+       3a3b68        900004           XYZ             F           BUY           100          9100            B2
+           S2        900005           XYZ             F          SELL           200          9000          NULL
+       3a3e30        900005           XYZ             F          SELL           100          9000            S2
+           B4        900006           XYZ             F           BUY           100          9200          NULL
+           B5        900007           XYZ             F           BUY           100          9200          NULL
+           B6        900008           XYZ             F           BUY           100          9200          NULL
+           S3        900009           XYZ             F          SELL            50          9200          NULL
+       3a4140        900009           XYZ             F           BUY            50          9200            B5
+           S4        900010           XYZ             F          SELL            50          9200          NULL
+           S5        900011           XYZ             F          SELL           100          9200          NULL
+           S7        900012           XYZ             F          SELL            50          9000          NULL
+           S8        900013           XYZ             F          SELL           150          9000          NULL
+           S9        900014           XYZ             F          SELL           100          8900          NULL
+           B7        900015           XYZ             F           BUY           200          9200          NULL
+       3a9190        900015           XYZ             U          SELL           100          9000            S8
+ -------------- Executions -----------------------
+ Match Number          Time     Stock Sym           Buy          Sell        Amount         Price 
+            0        900004           XYZ            B3            S1           100          9000 
+            1        900004           XYZ            B1            S1            50          9000 
+            2        900004           XYZ            B2            S1            50          9000 
+            3        900005           XYZ        3a3b68            S2           100          9000 
+            4        900006           XYZ            B4        3a3e30           100          9000 
+            5        900009           XYZ            B5            S3            50          9200 
+            6        900010           XYZ        3a4140            S4            50          9200 
+            7        900011           XYZ            B6            S5           100          9200 
+            8        900015           XYZ            B7            S9           100          8900 
+            9        900015           XYZ            B7            S7            50          9000 
+           10        900015           XYZ            B7            S8            50          9000 
+
+TIME STAMP: 900016
+Comment:    Order B8 Buy 200 @ 92.00 Generate 1 execution and a residual from this order
+ -------------- ORDER BOOK -----------------------
+ Order Ref Id          Time     Stock Sym        Filled      Buy/Sell        Amount         Price        Parent 
+           B1        900001           XYZ             F           BUY            50          9100          NULL
+           B2        900002           XYZ             F           BUY           150          9100          NULL
+           B3        900003           XYZ             F           BUY           100          9200          NULL
+           S1        900004           XYZ             F          SELL           200          9000          NULL
+       3a3b68        900004           XYZ             F           BUY           100          9100            B2
+           S2        900005           XYZ             F          SELL           200          9000          NULL
+       3a3e30        900005           XYZ             F          SELL           100          9000            S2
+           B4        900006           XYZ             F           BUY           100          9200          NULL
+           B5        900007           XYZ             F           BUY           100          9200          NULL
+           B6        900008           XYZ             F           BUY           100          9200          NULL
+           S3        900009           XYZ             F          SELL            50          9200          NULL
+       3a4140        900009           XYZ             F           BUY            50          9200            B5
+           S4        900010           XYZ             F          SELL            50          9200          NULL
+           S5        900011           XYZ             F          SELL           100          9200          NULL
+           S7        900012           XYZ             F          SELL            50          9000          NULL
+           S8        900013           XYZ             F          SELL           150          9000          NULL
+           S9        900014           XYZ             F          SELL           100          8900          NULL
+           B7        900015           XYZ             F           BUY           200          9200          NULL
+       3a9190        900015           XYZ             F          SELL           100          9000            S8
+           B8        900016           XYZ             F           BUY           200          9200          NULL
+       3a9458        900016           XYZ             U           BUY           100          9200            B8
+ -------------- Executions -----------------------
+ Match Number          Time     Stock Sym           Buy          Sell        Amount         Price 
+            0        900004           XYZ            B3            S1           100          9000 
+            1        900004           XYZ            B1            S1            50          9000 
+            2        900004           XYZ            B2            S1            50          9000 
+            3        900005           XYZ        3a3b68            S2           100          9000 
+            4        900006           XYZ            B4        3a3e30           100          9000 
+            5        900009           XYZ            B5            S3            50          9200 
+            6        900010           XYZ        3a4140            S4            50          9200 
+            7        900011           XYZ            B6            S5           100          9200 
+            8        900015           XYZ            B7            S9           100          8900 
+            9        900015           XYZ            B7            S7            50          9000 
+           10        900015           XYZ            B7            S8            50          9000 
+           11        900016           XYZ            B8        3a9190           100          9000 
+
+TIME STAMP: 900017
+Comment:    Order S10 Sell 100 @ 89.00 This order will fill the residual from B8.
+ -------------- ORDER BOOK -----------------------
+ Order Ref Id          Time     Stock Sym        Filled      Buy/Sell        Amount         Price        Parent 
+           B1        900001           XYZ             F           BUY            50          9100          NULL
+           B2        900002           XYZ             F           BUY           150          9100          NULL
+           B3        900003           XYZ             F           BUY           100          9200          NULL
+           S1        900004           XYZ             F          SELL           200          9000          NULL
+       3a3b68        900004           XYZ             F           BUY           100          9100            B2
+           S2        900005           XYZ             F          SELL           200          9000          NULL
+       3a3e30        900005           XYZ             F          SELL           100          9000            S2
+           B4        900006           XYZ             F           BUY           100          9200          NULL
+           B5        900007           XYZ             F           BUY           100          9200          NULL
+           B6        900008           XYZ             F           BUY           100          9200          NULL
+           S3        900009           XYZ             F          SELL            50          9200          NULL
+       3a4140        900009           XYZ             F           BUY            50          9200            B5
+           S4        900010           XYZ             F          SELL            50          9200          NULL
+           S5        900011           XYZ             F          SELL           100          9200          NULL
+           S7        900012           XYZ             F          SELL            50          9000          NULL
+           S8        900013           XYZ             F          SELL           150          9000          NULL
+           S9        900014           XYZ             F          SELL           100          8900          NULL
+           B7        900015           XYZ             F           BUY           200          9200          NULL
+       3a9190        900015           XYZ             F          SELL           100          9000            S8
+           B8        900016           XYZ             F           BUY           200          9200          NULL
+       3a9458        900016           XYZ             F           BUY           100          9200            B8
+          S10        900017           XYZ             F          SELL           100          8900          NULL
+ -------------- Executions -----------------------
+ Match Number          Time     Stock Sym           Buy          Sell        Amount         Price 
+            0        900004           XYZ            B3            S1           100          9000 
+            1        900004           XYZ            B1            S1            50          9000 
+            2        900004           XYZ            B2            S1            50          9000 
+            3        900005           XYZ        3a3b68            S2           100          9000 
+            4        900006           XYZ            B4        3a3e30           100          9000 
+            5        900009           XYZ            B5            S3            50          9200 
+            6        900010           XYZ        3a4140            S4            50          9200 
+            7        900011           XYZ            B6            S5           100          9200 
+            8        900015           XYZ            B7            S9           100          8900 
+            9        900015           XYZ            B7            S7            50          9000 
+           10        900015           XYZ            B7            S8            50          9000 
+           11        900016           XYZ            B8        3a9190           100          9000 
+           12        900017           XYZ        3a9458           S10           100          8900 
+
+TIME STAMP: 900018
+Comment:    Order S11 Sell 100 @ 89.00 
+ -------------- ORDER BOOK -----------------------
+ Order Ref Id          Time     Stock Sym        Filled      Buy/Sell        Amount         Price        Parent 
+           B1        900001           XYZ             F           BUY            50          9100          NULL
+           B2        900002           XYZ             F           BUY           150          9100          NULL
+           B3        900003           XYZ             F           BUY           100          9200          NULL
+           S1        900004           XYZ             F          SELL           200          9000          NULL
+       3a3b68        900004           XYZ             F           BUY           100          9100            B2
+           S2        900005           XYZ             F          SELL           200          9000          NULL
+       3a3e30        900005           XYZ             F          SELL           100          9000            S2
+           B4        900006           XYZ             F           BUY           100          9200          NULL
+           B5        900007           XYZ             F           BUY           100          9200          NULL
+           B6        900008           XYZ             F           BUY           100          9200          NULL
+           S3        900009           XYZ             F          SELL            50          9200          NULL
+       3a4140        900009           XYZ             F           BUY            50          9200            B5
+           S4        900010           XYZ             F          SELL            50          9200          NULL
+           S5        900011           XYZ             F          SELL           100          9200          NULL
+           S7        900012           XYZ             F          SELL            50          9000          NULL
+           S8        900013           XYZ             F          SELL           150          9000          NULL
+           S9        900014           XYZ             F          SELL           100          8900          NULL
+           B7        900015           XYZ             F           BUY           200          9200          NULL
+       3a9190        900015           XYZ             F          SELL           100          9000            S8
+           B8        900016           XYZ             F           BUY           200          9200          NULL
+       3a9458        900016           XYZ             F           BUY           100          9200            B8
+          S10        900017           XYZ             F          SELL           100          8900          NULL
+          S11        900018           XYZ             U          SELL           100          8900          NULL
+ -------------- Executions -----------------------
+ Match Number          Time     Stock Sym           Buy          Sell        Amount         Price 
+            0        900004           XYZ            B3            S1           100          9000 
+            1        900004           XYZ            B1            S1            50          9000 
+            2        900004           XYZ            B2            S1            50          9000 
+            3        900005           XYZ        3a3b68            S2           100          9000 
+            4        900006           XYZ            B4        3a3e30           100          9000 
+            5        900009           XYZ            B5            S3            50          9200 
+            6        900010           XYZ        3a4140            S4            50          9200 
+            7        900011           XYZ            B6            S5           100          9200 
+            8        900015           XYZ            B7            S9           100          8900 
+            9        900015           XYZ            B7            S7            50          9000 
+           10        900015           XYZ            B7            S8            50          9000 
+           11        900016           XYZ            B8        3a9190           100          9000 
+           12        900017           XYZ        3a9458           S10           100          8900 
+
+TIME STAMP: 900019
+Comment:    Order S12 Sell 100 @ 89.00 
+ -------------- ORDER BOOK -----------------------
+ Order Ref Id          Time     Stock Sym        Filled      Buy/Sell        Amount         Price        Parent 
+           B1        900001           XYZ             F           BUY            50          9100          NULL
+           B2        900002           XYZ             F           BUY           150          9100          NULL
+           B3        900003           XYZ             F           BUY           100          9200          NULL
+           S1        900004           XYZ             F          SELL           200          9000          NULL
+       3a3b68        900004           XYZ             F           BUY           100          9100            B2
+           S2        900005           XYZ             F          SELL           200          9000          NULL
+       3a3e30        900005           XYZ             F          SELL           100          9000            S2
+           B4        900006           XYZ             F           BUY           100          9200          NULL
+           B5        900007           XYZ             F           BUY           100          9200          NULL
+           B6        900008           XYZ             F           BUY           100          9200          NULL
+           S3        900009           XYZ             F          SELL            50          9200          NULL
+       3a4140        900009           XYZ             F           BUY            50          9200            B5
+           S4        900010           XYZ             F          SELL            50          9200          NULL
+           S5        900011           XYZ             F          SELL           100          9200          NULL
+           S7        900012           XYZ             F          SELL            50          9000          NULL
+           S8        900013           XYZ             F          SELL           150          9000          NULL
+           S9        900014           XYZ             F          SELL           100          8900          NULL
+           B7        900015           XYZ             F           BUY           200          9200          NULL
+       3a9190        900015           XYZ             F          SELL           100          9000            S8
+           B8        900016           XYZ             F           BUY           200          9200          NULL
+       3a9458        900016           XYZ             F           BUY           100          9200            B8
+          S10        900017           XYZ             F          SELL           100          8900          NULL
+          S11        900018           XYZ             U          SELL           100          8900          NULL
+          S12        900019           XYZ             U          SELL           100          8900          NULL
+ -------------- Executions -----------------------
+ Match Number          Time     Stock Sym           Buy          Sell        Amount         Price 
+            0        900004           XYZ            B3            S1           100          9000 
+            1        900004           XYZ            B1            S1            50          9000 
+            2        900004           XYZ            B2            S1            50          9000 
+            3        900005           XYZ        3a3b68            S2           100          9000 
+            4        900006           XYZ            B4        3a3e30           100          9000 
+            5        900009           XYZ            B5            S3            50          9200 
+            6        900010           XYZ        3a4140            S4            50          9200 
+            7        900011           XYZ            B6            S5           100          9200 
+            8        900015           XYZ            B7            S9           100          8900 
+            9        900015           XYZ            B7            S7            50          9000 
+           10        900015           XYZ            B7            S8            50          9000 
+           11        900016           XYZ            B8        3a9190           100          9000 
+           12        900017           XYZ        3a9458           S10           100          8900 
+
+TIME STAMP: 900020
+Comment:    Order B9 Buy 50 @ 89.00. Will match S11 and create residual.
+ -------------- ORDER BOOK -----------------------
+ Order Ref Id          Time     Stock Sym        Filled      Buy/Sell        Amount         Price        Parent 
+           B1        900001           XYZ             F           BUY            50          9100          NULL
+           B2        900002           XYZ             F           BUY           150          9100          NULL
+           B3        900003           XYZ             F           BUY           100          9200          NULL
+           S1        900004           XYZ             F          SELL           200          9000          NULL
+       3a3b68        900004           XYZ             F           BUY           100          9100            B2
+           S2        900005           XYZ             F          SELL           200          9000          NULL
+       3a3e30        900005           XYZ             F          SELL           100          9000            S2
+           B4        900006           XYZ             F           BUY           100          9200          NULL
+           B5        900007           XYZ             F           BUY           100          9200          NULL
+           B6        900008           XYZ             F           BUY           100          9200          NULL
+           S3        900009           XYZ             F          SELL            50          9200          NULL
+       3a4140        900009           XYZ             F           BUY            50          9200            B5
+           S4        900010           XYZ             F          SELL            50          9200          NULL
+           S5        900011           XYZ             F          SELL           100          9200          NULL
+           S7        900012           XYZ             F          SELL            50          9000          NULL
+           S8        900013           XYZ             F          SELL           150          9000          NULL
+           S9        900014           XYZ             F          SELL           100          8900          NULL
+           B7        900015           XYZ             F           BUY           200          9200          NULL
+       3a9190        900015           XYZ             F          SELL           100          9000            S8
+           B8        900016           XYZ             F           BUY           200          9200          NULL
+       3a9458        900016           XYZ             F           BUY           100          9200            B8
+          S10        900017           XYZ             F          SELL           100          8900          NULL
+          S11        900018           XYZ             F          SELL           100          8900          NULL
+          S12        900019           XYZ             U          SELL           100          8900          NULL
+           B9        900020           XYZ             F           BUY            50          8900          NULL
+       3a9ca8        900020           XYZ             U          SELL            50          8900           S11
+ -------------- Executions -----------------------
+ Match Number          Time     Stock Sym           Buy          Sell        Amount         Price 
+            0        900004           XYZ            B3            S1           100          9000 
+            1        900004           XYZ            B1            S1            50          9000 
+            2        900004           XYZ            B2            S1            50          9000 
+            3        900005           XYZ        3a3b68            S2           100          9000 
+            4        900006           XYZ            B4        3a3e30           100          9000 
+            5        900009           XYZ            B5            S3            50          9200 
+            6        900010           XYZ        3a4140            S4            50          9200 
+            7        900011           XYZ            B6            S5           100          9200 
+            8        900015           XYZ            B7            S9           100          8900 
+            9        900015           XYZ            B7            S7            50          9000 
+           10        900015           XYZ            B7            S8            50          9000 
+           11        900016           XYZ            B8        3a9190           100          9000 
+           12        900017           XYZ        3a9458           S10           100          8900 
+           13        900020           XYZ            B9           S11            50          8900 
+
+TIME STAMP: 900021
+Comment:    Order B10 Buy 50 @ 89.00. Will match residual of S11.
+ -------------- ORDER BOOK -----------------------
+ Order Ref Id          Time     Stock Sym        Filled      Buy/Sell        Amount         Price        Parent 
+           B1        900001           XYZ             F           BUY            50          9100          NULL
+           B2        900002           XYZ             F           BUY           150          9100          NULL
+           B3        900003           XYZ             F           BUY           100          9200          NULL
+           S1        900004           XYZ             F          SELL           200          9000          NULL
+       3a3b68        900004           XYZ             F           BUY           100          9100            B2
+           S2        900005           XYZ             F          SELL           200          9000          NULL
+       3a3e30        900005           XYZ             F          SELL           100          9000            S2
+           B4        900006           XYZ             F           BUY           100          9200          NULL
+           B5        900007           XYZ             F           BUY           100          9200          NULL
+           B6        900008           XYZ             F           BUY           100          9200          NULL
+           S3        900009           XYZ             F          SELL            50          9200          NULL
+       3a4140        900009           XYZ             F           BUY            50          9200            B5
+           S4        900010           XYZ             F          SELL            50          9200          NULL
+           S5        900011           XYZ             F          SELL           100          9200          NULL
+           S7        900012           XYZ             F          SELL            50          9000          NULL
+           S8        900013           XYZ             F          SELL           150          9000          NULL
+           S9        900014           XYZ             F          SELL           100          8900          NULL
+           B7        900015           XYZ             F           BUY           200          9200          NULL
+       3a9190        900015           XYZ             F          SELL           100          9000            S8
+           B8        900016           XYZ             F           BUY           200          9200          NULL
+       3a9458        900016           XYZ             F           BUY           100          9200            B8
+          S10        900017           XYZ             F          SELL           100          8900          NULL
+          S11        900018           XYZ             F          SELL           100          8900          NULL
+          S12        900019           XYZ             U          SELL           100          8900          NULL
+           B9        900020           XYZ             F           BUY            50          8900          NULL
+       3a9ca8        900020           XYZ             F          SELL            50          8900           S11
+          B10        900021           XYZ             F           BUY            50          8900          NULL
+ -------------- Executions -----------------------
+ Match Number          Time     Stock Sym           Buy          Sell        Amount         Price 
+            0        900004           XYZ            B3            S1           100          9000 
+            1        900004           XYZ            B1            S1            50          9000 
+            2        900004           XYZ            B2            S1            50          9000 
+            3        900005           XYZ        3a3b68            S2           100          9000 
+            4        900006           XYZ            B4        3a3e30           100          9000 
+            5        900009           XYZ            B5            S3            50          9200 
+            6        900010           XYZ        3a4140            S4            50          9200 
+            7        900011           XYZ            B6            S5           100          9200 
+            8        900015           XYZ            B7            S9           100          8900 
+            9        900015           XYZ            B7            S7            50          9000 
+           10        900015           XYZ            B7            S8            50          9000 
+           11        900016           XYZ            B8        3a9190           100          9000 
+           12        900017           XYZ        3a9458           S10           100          8900 
+           13        900020           XYZ            B9           S11            50          8900 
+           14        900021           XYZ           B10        3a9ca8            50          8900 
+
+TIME STAMP: 900022
+Comment:    Order B11 Buy 100 @ 89.00. Will match S12.
+ -------------- ORDER BOOK -----------------------
+ Order Ref Id          Time     Stock Sym        Filled      Buy/Sell        Amount         Price        Parent 
+           B1        900001           XYZ             F           BUY            50          9100          NULL
+           B2        900002           XYZ             F           BUY           150          9100          NULL
+           B3        900003           XYZ             F           BUY           100          9200          NULL
+           S1        900004           XYZ             F          SELL           200          9000          NULL
+       3a3b68        900004           XYZ             F           BUY           100          9100            B2
+           S2        900005           XYZ             F          SELL           200          9000          NULL
+       3a3e30        900005           XYZ             F          SELL           100          9000            S2
+           B4        900006           XYZ             F           BUY           100          9200          NULL
+           B5        900007           XYZ             F           BUY           100          9200          NULL
+           B6        900008           XYZ             F           BUY           100          9200          NULL
+           S3        900009           XYZ             F          SELL            50          9200          NULL
+       3a4140        900009           XYZ             F           BUY            50          9200            B5
+           S4        900010           XYZ             F          SELL            50          9200          NULL
+           S5        900011           XYZ             F          SELL           100          9200          NULL
+           S7        900012           XYZ             F          SELL            50          9000          NULL
+           S8        900013           XYZ             F          SELL           150          9000          NULL
+           S9        900014           XYZ             F          SELL           100          8900          NULL
+           B7        900015           XYZ             F           BUY           200          9200          NULL
+       3a9190        900015           XYZ             F          SELL           100          9000            S8
+           B8        900016           XYZ             F           BUY           200          9200          NULL
+       3a9458        900016           XYZ             F           BUY           100          9200            B8
+          S10        900017           XYZ             F          SELL           100          8900          NULL
+          S11        900018           XYZ             F          SELL           100          8900          NULL
+          S12        900019           XYZ             F          SELL           100          8900          NULL
+           B9        900020           XYZ             F           BUY            50          8900          NULL
+       3a9ca8        900020           XYZ             F          SELL            50          8900           S11
+          B10        900021           XYZ             F           BUY            50          8900          NULL
+          B11        900022           XYZ             F           BUY           100          8900          NULL
+ -------------- Executions -----------------------
+ Match Number          Time     Stock Sym           Buy          Sell        Amount         Price 
+            0        900004           XYZ            B3            S1           100          9000 
+            1        900004           XYZ            B1            S1            50          9000 
+            2        900004           XYZ            B2            S1            50          9000 
+            3        900005           XYZ        3a3b68            S2           100          9000 
+            4        900006           XYZ            B4        3a3e30           100          9000 
+            5        900009           XYZ            B5            S3            50          9200 
+            6        900010           XYZ        3a4140            S4            50          9200 
+            7        900011           XYZ            B6            S5           100          9200 
+            8        900015           XYZ            B7            S9           100          8900 
+            9        900015           XYZ            B7            S7            50          9000 
+           10        900015           XYZ            B7            S8            50          9000 
+           11        900016           XYZ            B8        3a9190           100          9000 
+           12        900017           XYZ        3a9458           S10           100          8900 
+           13        900020           XYZ            B9           S11            50          8900 
+           14        900021           XYZ           B10        3a9ca8            50          8900 
+           15        900022           XYZ           B11           S12           100          8900 
+
+TIME STAMP: 900023
+Comment:    Order S13 Sell 100 @ 80.00 Big order. A Series of small buy orders will come in. 
+Demonstrates that residual orders can have a parent that is a residual order. You need to follow the chain of ancestors to find the root " real " order for the execution message
+ -------------- ORDER BOOK -----------------------
+ Order Ref Id          Time     Stock Sym        Filled      Buy/Sell        Amount         Price        Parent 
+           B1        900001           XYZ             F           BUY            50          9100          NULL
+           B2        900002           XYZ             F           BUY           150          9100          NULL
+           B3        900003           XYZ             F           BUY           100          9200          NULL
+           S1        900004           XYZ             F          SELL           200          9000          NULL
+       3a3b68        900004           XYZ             F           BUY           100          9100            B2
+           S2        900005           XYZ             F          SELL           200          9000          NULL
+       3a3e30        900005           XYZ             F          SELL           100          9000            S2
+           B4        900006           XYZ             F           BUY           100          9200          NULL
+           B5        900007           XYZ             F           BUY           100          9200          NULL
+           B6        900008           XYZ             F           BUY           100          9200          NULL
+           S3        900009           XYZ             F          SELL            50          9200          NULL
+       3a4140        900009           XYZ             F           BUY            50          9200            B5
+           S4        900010           XYZ             F          SELL            50          9200          NULL
+           S5        900011           XYZ             F          SELL           100          9200          NULL
+           S7        900012           XYZ             F          SELL            50          9000          NULL
+           S8        900013           XYZ             F          SELL           150          9000          NULL
+           S9        900014           XYZ             F          SELL           100          8900          NULL
+           B7        900015           XYZ             F           BUY           200          9200          NULL
+       3a9190        900015           XYZ             F          SELL           100          9000            S8
+           B8        900016           XYZ             F           BUY           200          9200          NULL
+       3a9458        900016           XYZ             F           BUY           100          9200            B8
+          S10        900017           XYZ             F          SELL           100          8900          NULL
+          S11        900018           XYZ             F          SELL           100          8900          NULL
+          S12        900019           XYZ             F          SELL           100          8900          NULL
+           B9        900020           XYZ             F           BUY            50          8900          NULL
+       3a9ca8        900020           XYZ             F          SELL            50          8900           S11
+          B10        900021           XYZ             F           BUY            50          8900          NULL
+          B11        900022           XYZ             F           BUY           100          8900          NULL
+          S13        900023           XYZ             U          SELL           100          8000          NULL
+ -------------- Executions -----------------------
+ Match Number          Time     Stock Sym           Buy          Sell        Amount         Price 
+            0        900004           XYZ            B3            S1           100          9000 
+            1        900004           XYZ            B1            S1            50          9000 
+            2        900004           XYZ            B2            S1            50          9000 
+            3        900005           XYZ        3a3b68            S2           100          9000 
+            4        900006           XYZ            B4        3a3e30           100          9000 
+            5        900009           XYZ            B5            S3            50          9200 
+            6        900010           XYZ        3a4140            S4            50          9200 
+            7        900011           XYZ            B6            S5           100          9200 
+            8        900015           XYZ            B7            S9           100          8900 
+            9        900015           XYZ            B7            S7            50          9000 
+           10        900015           XYZ            B7            S8            50          9000 
+           11        900016           XYZ            B8        3a9190           100          9000 
+           12        900017           XYZ        3a9458           S10           100          8900 
+           13        900020           XYZ            B9           S11            50          8900 
+           14        900021           XYZ           B10        3a9ca8            50          8900 
+           15        900022           XYZ           B11           S12           100          8900 
+
+TIME STAMP: 900024
+Comment:    Order B12 Buy 10 @ 92.00
+ -------------- ORDER BOOK -----------------------
+ Order Ref Id          Time     Stock Sym        Filled      Buy/Sell        Amount         Price        Parent 
+           B1        900001           XYZ             F           BUY            50          9100          NULL
+           B2        900002           XYZ             F           BUY           150          9100          NULL
+           B3        900003           XYZ             F           BUY           100          9200          NULL
+           S1        900004           XYZ             F          SELL           200          9000          NULL
+       3a3b68        900004           XYZ             F           BUY           100          9100            B2
+           S2        900005           XYZ             F          SELL           200          9000          NULL
+       3a3e30        900005           XYZ             F          SELL           100          9000            S2
+           B4        900006           XYZ             F           BUY           100          9200          NULL
+           B5        900007           XYZ             F           BUY           100          9200          NULL
+           B6        900008           XYZ             F           BUY           100          9200          NULL
+           S3        900009           XYZ             F          SELL            50          9200          NULL
+       3a4140        900009           XYZ             F           BUY            50          9200            B5
+           S4        900010           XYZ             F          SELL            50          9200          NULL
+           S5        900011           XYZ             F          SELL           100          9200          NULL
+           S7        900012           XYZ             F          SELL            50          9000          NULL
+           S8        900013           XYZ             F          SELL           150          9000          NULL
+           S9        900014           XYZ             F          SELL           100          8900          NULL
+           B7        900015           XYZ             F           BUY           200          9200          NULL
+       3a9190        900015           XYZ             F          SELL           100          9000            S8
+           B8        900016           XYZ             F           BUY           200          9200          NULL
+       3a9458        900016           XYZ             F           BUY           100          9200            B8
+          S10        900017           XYZ             F          SELL           100          8900          NULL
+          S11        900018           XYZ             F          SELL           100          8900          NULL
+          S12        900019           XYZ             F          SELL           100          8900          NULL
+           B9        900020           XYZ             F           BUY            50          8900          NULL
+       3a9ca8        900020           XYZ             F          SELL            50          8900           S11
+          B10        900021           XYZ             F           BUY            50          8900          NULL
+          B11        900022           XYZ             F           BUY           100          8900          NULL
+          S13        900023           XYZ             F          SELL           100          8000          NULL
+          B12        900024           XYZ             F           BUY            10          9200          NULL
+       3aa540        900024           XYZ             U          SELL            90          8000           S13
+ -------------- Executions -----------------------
+ Match Number          Time     Stock Sym           Buy          Sell        Amount         Price 
+            0        900004           XYZ            B3            S1           100          9000 
+            1        900004           XYZ            B1            S1            50          9000 
+            2        900004           XYZ            B2            S1            50          9000 
+            3        900005           XYZ        3a3b68            S2           100          9000 
+            4        900006           XYZ            B4        3a3e30           100          9000 
+            5        900009           XYZ            B5            S3            50          9200 
+            6        900010           XYZ        3a4140            S4            50          9200 
+            7        900011           XYZ            B6            S5           100          9200 
+            8        900015           XYZ            B7            S9           100          8900 
+            9        900015           XYZ            B7            S7            50          9000 
+           10        900015           XYZ            B7            S8            50          9000 
+           11        900016           XYZ            B8        3a9190           100          9000 
+           12        900017           XYZ        3a9458           S10           100          8900 
+           13        900020           XYZ            B9           S11            50          8900 
+           14        900021           XYZ           B10        3a9ca8            50          8900 
+           15        900022           XYZ           B11           S12           100          8900 
+           16        900024           XYZ           B12           S13            10          8000 
+
+TIME STAMP: 900025
+Comment:    Order B13 Buy 10 @ 92.00
+ -------------- ORDER BOOK -----------------------
+ Order Ref Id          Time     Stock Sym        Filled      Buy/Sell        Amount         Price        Parent 
+           B1        900001           XYZ             F           BUY            50          9100          NULL
+           B2        900002           XYZ             F           BUY           150          9100          NULL
+           B3        900003           XYZ             F           BUY           100          9200          NULL
+           S1        900004           XYZ             F          SELL           200          9000          NULL
+       3a3b68        900004           XYZ             F           BUY           100          9100            B2
+           S2        900005           XYZ             F          SELL           200          9000          NULL
+       3a3e30        900005           XYZ             F          SELL           100          9000            S2
+           B4        900006           XYZ             F           BUY           100          9200          NULL
+           B5        900007           XYZ             F           BUY           100          9200          NULL
+           B6        900008           XYZ             F           BUY           100          9200          NULL
+           S3        900009           XYZ             F          SELL            50          9200          NULL
+       3a4140        900009           XYZ             F           BUY            50          9200            B5
+           S4        900010           XYZ             F          SELL            50          9200          NULL
+           S5        900011           XYZ             F          SELL           100          9200          NULL
+           S7        900012           XYZ             F          SELL            50          9000          NULL
+           S8        900013           XYZ             F          SELL           150          9000          NULL
+           S9        900014           XYZ             F          SELL           100          8900          NULL
+           B7        900015           XYZ             F           BUY           200          9200          NULL
+       3a9190        900015           XYZ             F          SELL           100          9000            S8
+           B8        900016           XYZ             F           BUY           200          9200          NULL
+       3a9458        900016           XYZ             F           BUY           100          9200            B8
+          S10        900017           XYZ             F          SELL           100          8900          NULL
+          S11        900018           XYZ             F          SELL           100          8900          NULL
+          S12        900019           XYZ             F          SELL           100          8900          NULL
+           B9        900020           XYZ             F           BUY            50          8900          NULL
+       3a9ca8        900020           XYZ             F          SELL            50          8900           S11
+          B10        900021           XYZ             F           BUY            50          8900          NULL
+          B11        900022           XYZ             F           BUY           100          8900          NULL
+          S13        900023           XYZ             F          SELL           100          8000          NULL
+          B12        900024           XYZ             F           BUY            10          9200          NULL
+       3aa540        900024           XYZ             F          SELL            90          8000           S13
+          B13        900025           XYZ             F           BUY            10          9200          NULL
+       3aa808        900025           XYZ             U          SELL            80          8000        3aa540
+ -------------- Executions -----------------------
+ Match Number          Time     Stock Sym           Buy          Sell        Amount         Price 
+            0        900004           XYZ            B3            S1           100          9000 
+            1        900004           XYZ            B1            S1            50          9000 
+            2        900004           XYZ            B2            S1            50          9000 
+            3        900005           XYZ        3a3b68            S2           100          9000 
+            4        900006           XYZ            B4        3a3e30           100          9000 
+            5        900009           XYZ            B5            S3            50          9200 
+            6        900010           XYZ        3a4140            S4            50          9200 
+            7        900011           XYZ            B6            S5           100          9200 
+            8        900015           XYZ            B7            S9           100          8900 
+            9        900015           XYZ            B7            S7            50          9000 
+           10        900015           XYZ            B7            S8            50          9000 
+           11        900016           XYZ            B8        3a9190           100          9000 
+           12        900017           XYZ        3a9458           S10           100          8900 
+           13        900020           XYZ            B9           S11            50          8900 
+           14        900021           XYZ           B10        3a9ca8            50          8900 
+           15        900022           XYZ           B11           S12           100          8900 
+           16        900024           XYZ           B12           S13            10          8000 
+           17        900025           XYZ           B13        3aa540            10          8000 
+
+TIME STAMP: 900026
+Comment:    Order B14 Buy 10 @ 92.00
+ -------------- ORDER BOOK -----------------------
+ Order Ref Id          Time     Stock Sym        Filled      Buy/Sell        Amount         Price        Parent 
+           B1        900001           XYZ             F           BUY            50          9100          NULL
+           B2        900002           XYZ             F           BUY           150          9100          NULL
+           B3        900003           XYZ             F           BUY           100          9200          NULL
+           S1        900004           XYZ             F          SELL           200          9000          NULL
+       3a3b68        900004           XYZ             F           BUY           100          9100            B2
+           S2        900005           XYZ             F          SELL           200          9000          NULL
+       3a3e30        900005           XYZ             F          SELL           100          9000            S2
+           B4        900006           XYZ             F           BUY           100          9200          NULL
+           B5        900007           XYZ             F           BUY           100          9200          NULL
+           B6        900008           XYZ             F           BUY           100          9200          NULL
+           S3        900009           XYZ             F          SELL            50          9200          NULL
+       3a4140        900009           XYZ             F           BUY            50          9200            B5
+           S4        900010           XYZ             F          SELL            50          9200          NULL
+           S5        900011           XYZ             F          SELL           100          9200          NULL
+           S7        900012           XYZ             F          SELL            50          9000          NULL
+           S8        900013           XYZ             F          SELL           150          9000          NULL
+           S9        900014           XYZ             F          SELL           100          8900          NULL
+           B7        900015           XYZ             F           BUY           200          9200          NULL
+       3a9190        900015           XYZ             F          SELL           100          9000            S8
+           B8        900016           XYZ             F           BUY           200          9200          NULL
+       3a9458        900016           XYZ             F           BUY           100          9200            B8
+          S10        900017           XYZ             F          SELL           100          8900          NULL
+          S11        900018           XYZ             F          SELL           100          8900          NULL
+          S12        900019           XYZ             F          SELL           100          8900          NULL
+           B9        900020           XYZ             F           BUY            50          8900          NULL
+       3a9ca8        900020           XYZ             F          SELL            50          8900           S11
+          B10        900021           XYZ             F           BUY            50          8900          NULL
+          B11        900022           XYZ             F           BUY           100          8900          NULL
+          S13        900023           XYZ             F          SELL           100          8000          NULL
+          B12        900024           XYZ             F           BUY            10          9200          NULL
+       3aa540        900024           XYZ             F          SELL            90          8000           S13
+          B13        900025           XYZ             F           BUY            10          9200          NULL
+       3aa808        900025           XYZ             F          SELL            80          8000        3aa540
+          B14        900026           XYZ             F           BUY            10          9200          NULL
+       3aaad0        900026           XYZ             U          SELL            70          8000        3aa808
+ -------------- Executions -----------------------
+ Match Number          Time     Stock Sym           Buy          Sell        Amount         Price 
+            0        900004           XYZ            B3            S1           100          9000 
+            1        900004           XYZ            B1            S1            50          9000 
+            2        900004           XYZ            B2            S1            50          9000 
+            3        900005           XYZ        3a3b68            S2           100          9000 
+            4        900006           XYZ            B4        3a3e30           100          9000 
+            5        900009           XYZ            B5            S3            50          9200 
+            6        900010           XYZ        3a4140            S4            50          9200 
+            7        900011           XYZ            B6            S5           100          9200 
+            8        900015           XYZ            B7            S9           100          8900 
+            9        900015           XYZ            B7            S7            50          9000 
+           10        900015           XYZ            B7            S8            50          9000 
+           11        900016           XYZ            B8        3a9190           100          9000 
+           12        900017           XYZ        3a9458           S10           100          8900 
+           13        900020           XYZ            B9           S11            50          8900 
+           14        900021           XYZ           B10        3a9ca8            50          8900 
+           15        900022           XYZ           B11           S12           100          8900 
+           16        900024           XYZ           B12           S13            10          8000 
+           17        900025           XYZ           B13        3aa540            10          8000 
+           18        900026           XYZ           B14        3aa808            10          8000 
+
+TIME STAMP: 900027
+Comment:    Order B15 Buy 10 @ 30.00 Buy at a lower price than the current unfilled residual sell. No match because buy price is lower than sell price.
+ -------------- ORDER BOOK -----------------------
+ Order Ref Id          Time     Stock Sym        Filled      Buy/Sell        Amount         Price        Parent 
+           B1        900001           XYZ             F           BUY            50          9100          NULL
+           B2        900002           XYZ             F           BUY           150          9100          NULL
+           B3        900003           XYZ             F           BUY           100          9200          NULL
+           S1        900004           XYZ             F          SELL           200          9000          NULL
+       3a3b68        900004           XYZ             F           BUY           100          9100            B2
+           S2        900005           XYZ             F          SELL           200          9000          NULL
+       3a3e30        900005           XYZ             F          SELL           100          9000            S2
+           B4        900006           XYZ             F           BUY           100          9200          NULL
+           B5        900007           XYZ             F           BUY           100          9200          NULL
+           B6        900008           XYZ             F           BUY           100          9200          NULL
+           S3        900009           XYZ             F          SELL            50          9200          NULL
+       3a4140        900009           XYZ             F           BUY            50          9200            B5
+           S4        900010           XYZ             F          SELL            50          9200          NULL
+           S5        900011           XYZ             F          SELL           100          9200          NULL
+           S7        900012           XYZ             F          SELL            50          9000          NULL
+           S8        900013           XYZ             F          SELL           150          9000          NULL
+           S9        900014           XYZ             F          SELL           100          8900          NULL
+           B7        900015           XYZ             F           BUY           200          9200          NULL
+       3a9190        900015           XYZ             F          SELL           100          9000            S8
+           B8        900016           XYZ             F           BUY           200          9200          NULL
+       3a9458        900016           XYZ             F           BUY           100          9200            B8
+          S10        900017           XYZ             F          SELL           100          8900          NULL
+          S11        900018           XYZ             F          SELL           100          8900          NULL
+          S12        900019           XYZ             F          SELL           100          8900          NULL
+           B9        900020           XYZ             F           BUY            50          8900          NULL
+       3a9ca8        900020           XYZ             F          SELL            50          8900           S11
+          B10        900021           XYZ             F           BUY            50          8900          NULL
+          B11        900022           XYZ             F           BUY           100          8900          NULL
+          S13        900023           XYZ             F          SELL           100          8000          NULL
+          B12        900024           XYZ             F           BUY            10          9200          NULL
+       3aa540        900024           XYZ             F          SELL            90          8000           S13
+          B13        900025           XYZ             F           BUY            10          9200          NULL
+       3aa808        900025           XYZ             F          SELL            80          8000        3aa540
+          B14        900026           XYZ             F           BUY            10          9200          NULL
+       3aaad0        900026           XYZ             U          SELL            70          8000        3aa808
+          B15        900027           XYZ             U           BUY            10          3000          NULL
+ -------------- Executions -----------------------
+ Match Number          Time     Stock Sym           Buy          Sell        Amount         Price 
+            0        900004           XYZ            B3            S1           100          9000 
+            1        900004           XYZ            B1            S1            50          9000 
+            2        900004           XYZ            B2            S1            50          9000 
+            3        900005           XYZ        3a3b68            S2           100          9000 
+            4        900006           XYZ            B4        3a3e30           100          9000 
+            5        900009           XYZ            B5            S3            50          9200 
+            6        900010           XYZ        3a4140            S4            50          9200 
+            7        900011           XYZ            B6            S5           100          9200 
+            8        900015           XYZ            B7            S9           100          8900 
+            9        900015           XYZ            B7            S7            50          9000 
+           10        900015           XYZ            B7            S8            50          9000 
+           11        900016           XYZ            B8        3a9190           100          9000 
+           12        900017           XYZ        3a9458           S10           100          8900 
+           13        900020           XYZ            B9           S11            50          8900 
+           14        900021           XYZ           B10        3a9ca8            50          8900 
+           15        900022           XYZ           B11           S12           100          8900 
+           16        900024           XYZ           B12           S13            10          8000 
+           17        900025           XYZ           B13        3aa540            10          8000 
+           18        900026           XYZ           B14        3aa808            10          8000 
+
+TIME STAMP: 900028
+Comment:    Order S14 Sell 100 @ 60.00
+ -------------- ORDER BOOK -----------------------
+ Order Ref Id          Time     Stock Sym        Filled      Buy/Sell        Amount         Price        Parent 
+           B1        900001           XYZ             F           BUY            50          9100          NULL
+           B2        900002           XYZ             F           BUY           150          9100          NULL
+           B3        900003           XYZ             F           BUY           100          9200          NULL
+           S1        900004           XYZ             F          SELL           200          9000          NULL
+       3a3b68        900004           XYZ             F           BUY           100          9100            B2
+           S2        900005           XYZ             F          SELL           200          9000          NULL
+       3a3e30        900005           XYZ             F          SELL           100          9000            S2
+           B4        900006           XYZ             F           BUY           100          9200          NULL
+           B5        900007           XYZ             F           BUY           100          9200          NULL
+           B6        900008           XYZ             F           BUY           100          9200          NULL
+           S3        900009           XYZ             F          SELL            50          9200          NULL
+       3a4140        900009           XYZ             F           BUY            50          9200            B5
+           S4        900010           XYZ             F          SELL            50          9200          NULL
+           S5        900011           XYZ             F          SELL           100          9200          NULL
+           S7        900012           XYZ             F          SELL            50          9000          NULL
+           S8        900013           XYZ             F          SELL           150          9000          NULL
+           S9        900014           XYZ             F          SELL           100          8900          NULL
+           B7        900015           XYZ             F           BUY           200          9200          NULL
+       3a9190        900015           XYZ             F          SELL           100          9000            S8
+           B8        900016           XYZ             F           BUY           200          9200          NULL
+       3a9458        900016           XYZ             F           BUY           100          9200            B8
+          S10        900017           XYZ             F          SELL           100          8900          NULL
+          S11        900018           XYZ             F          SELL           100          8900          NULL
+          S12        900019           XYZ             F          SELL           100          8900          NULL
+           B9        900020           XYZ             F           BUY            50          8900          NULL
+       3a9ca8        900020           XYZ             F          SELL            50          8900           S11
+          B10        900021           XYZ             F           BUY            50          8900          NULL
+          B11        900022           XYZ             F           BUY           100          8900          NULL
+          S13        900023           XYZ             F          SELL           100          8000          NULL
+          B12        900024           XYZ             F           BUY            10          9200          NULL
+       3aa540        900024           XYZ             F          SELL            90          8000           S13
+          B13        900025           XYZ             F           BUY            10          9200          NULL
+       3aa808        900025           XYZ             F          SELL            80          8000        3aa540
+          B14        900026           XYZ             F           BUY            10          9200          NULL
+       3aaad0        900026           XYZ             U          SELL            70          8000        3aa808
+          B15        900027           XYZ             U           BUY            10          3000          NULL
+          S14        900028           XYZ             U          SELL           100          6000          NULL
+ -------------- Executions -----------------------
+ Match Number          Time     Stock Sym           Buy          Sell        Amount         Price 
+            0        900004           XYZ            B3            S1           100          9000 
+            1        900004           XYZ            B1            S1            50          9000 
+            2        900004           XYZ            B2            S1            50          9000 
+            3        900005           XYZ        3a3b68            S2           100          9000 
+            4        900006           XYZ            B4        3a3e30           100          9000 
+            5        900009           XYZ            B5            S3            50          9200 
+            6        900010           XYZ        3a4140            S4            50          9200 
+            7        900011           XYZ            B6            S5           100          9200 
+            8        900015           XYZ            B7            S9           100          8900 
+            9        900015           XYZ            B7            S7            50          9000 
+           10        900015           XYZ            B7            S8            50          9000 
+           11        900016           XYZ            B8        3a9190           100          9000 
+           12        900017           XYZ        3a9458           S10           100          8900 
+           13        900020           XYZ            B9           S11            50          8900 
+           14        900021           XYZ           B10        3a9ca8            50          8900 
+           15        900022           XYZ           B11           S12           100          8900 
+           16        900024           XYZ           B12           S13            10          8000 
+           17        900025           XYZ           B13        3aa540            10          8000 
+           18        900026           XYZ           B14        3aa808            10          8000 
+
+TIME STAMP: 900029
+Comment:    Order S15 Sell 100 @ 50.00
+ -------------- ORDER BOOK -----------------------
+ Order Ref Id          Time     Stock Sym        Filled      Buy/Sell        Amount         Price        Parent 
+           B1        900001           XYZ             F           BUY            50          9100          NULL
+           B2        900002           XYZ             F           BUY           150          9100          NULL
+           B3        900003           XYZ             F           BUY           100          9200          NULL
+           S1        900004           XYZ             F          SELL           200          9000          NULL
+       3a3b68        900004           XYZ             F           BUY           100          9100            B2
+           S2        900005           XYZ             F          SELL           200          9000          NULL
+       3a3e30        900005           XYZ             F          SELL           100          9000            S2
+           B4        900006           XYZ             F           BUY           100          9200          NULL
+           B5        900007           XYZ             F           BUY           100          9200          NULL
+           B6        900008           XYZ             F           BUY           100          9200          NULL
+           S3        900009           XYZ             F          SELL            50          9200          NULL
+       3a4140        900009           XYZ             F           BUY            50          9200            B5
+           S4        900010           XYZ             F          SELL            50          9200          NULL
+           S5        900011           XYZ             F          SELL           100          9200          NULL
+           S7        900012           XYZ             F          SELL            50          9000          NULL
+           S8        900013           XYZ             F          SELL           150          9000          NULL
+           S9        900014           XYZ             F          SELL           100          8900          NULL
+           B7        900015           XYZ             F           BUY           200          9200          NULL
+       3a9190        900015           XYZ             F          SELL           100          9000            S8
+           B8        900016           XYZ             F           BUY           200          9200          NULL
+       3a9458        900016           XYZ             F           BUY           100          9200            B8
+          S10        900017           XYZ             F          SELL           100          8900          NULL
+          S11        900018           XYZ             F          SELL           100          8900          NULL
+          S12        900019           XYZ             F          SELL           100          8900          NULL
+           B9        900020           XYZ             F           BUY            50          8900          NULL
+       3a9ca8        900020           XYZ             F          SELL            50          8900           S11
+          B10        900021           XYZ             F           BUY            50          8900          NULL
+          B11        900022           XYZ             F           BUY           100          8900          NULL
+          S13        900023           XYZ             F          SELL           100          8000          NULL
+          B12        900024           XYZ             F           BUY            10          9200          NULL
+       3aa540        900024           XYZ             F          SELL            90          8000           S13
+          B13        900025           XYZ             F           BUY            10          9200          NULL
+       3aa808        900025           XYZ             F          SELL            80          8000        3aa540
+          B14        900026           XYZ             F           BUY            10          9200          NULL
+       3aaad0        900026           XYZ             U          SELL            70          8000        3aa808
+          B15        900027           XYZ             U           BUY            10          3000          NULL
+          S14        900028           XYZ             U          SELL           100          6000          NULL
+          S15        900029           XYZ             U          SELL           100          5000          NULL
+ -------------- Executions -----------------------
+ Match Number          Time     Stock Sym           Buy          Sell        Amount         Price 
+            0        900004           XYZ            B3            S1           100          9000 
+            1        900004           XYZ            B1            S1            50          9000 
+            2        900004           XYZ            B2            S1            50          9000 
+            3        900005           XYZ        3a3b68            S2           100          9000 
+            4        900006           XYZ            B4        3a3e30           100          9000 
+            5        900009           XYZ            B5            S3            50          9200 
+            6        900010           XYZ        3a4140            S4            50          9200 
+            7        900011           XYZ            B6            S5           100          9200 
+            8        900015           XYZ            B7            S9           100          8900 
+            9        900015           XYZ            B7            S7            50          9000 
+           10        900015           XYZ            B7            S8            50          9000 
+           11        900016           XYZ            B8        3a9190           100          9000 
+           12        900017           XYZ        3a9458           S10           100          8900 
+           13        900020           XYZ            B9           S11            50          8900 
+           14        900021           XYZ           B10        3a9ca8            50          8900 
+           15        900022           XYZ           B11           S12           100          8900 
+           16        900024           XYZ           B12           S13            10          8000 
+           17        900025           XYZ           B13        3aa540            10          8000 
+           18        900026           XYZ           B14        3aa808            10          8000 
+
+TIME STAMP: 900030
+Comment:    Order S16 Sell 100 @ 40.00
+ -------------- ORDER BOOK -----------------------
+ Order Ref Id          Time     Stock Sym        Filled      Buy/Sell        Amount         Price        Parent 
+           B1        900001           XYZ             F           BUY            50          9100          NULL
+           B2        900002           XYZ             F           BUY           150          9100          NULL
+           B3        900003           XYZ             F           BUY           100          9200          NULL
+           S1        900004           XYZ             F          SELL           200          9000          NULL
+       3a3b68        900004           XYZ             F           BUY           100          9100            B2
+           S2        900005           XYZ             F          SELL           200          9000          NULL
+       3a3e30        900005           XYZ             F          SELL           100          9000            S2
+           B4        900006           XYZ             F           BUY           100          9200          NULL
+           B5        900007           XYZ             F           BUY           100          9200          NULL
+           B6        900008           XYZ             F           BUY           100          9200          NULL
+           S3        900009           XYZ             F          SELL            50          9200          NULL
+       3a4140        900009           XYZ             F           BUY            50          9200            B5
+           S4        900010           XYZ             F          SELL            50          9200          NULL
+           S5        900011           XYZ             F          SELL           100          9200          NULL
+           S7        900012           XYZ             F          SELL            50          9000          NULL
+           S8        900013           XYZ             F          SELL           150          9000          NULL
+           S9        900014           XYZ             F          SELL           100          8900          NULL
+           B7        900015           XYZ             F           BUY           200          9200          NULL
+       3a9190        900015           XYZ             F          SELL           100          9000            S8
+           B8        900016           XYZ             F           BUY           200          9200          NULL
+       3a9458        900016           XYZ             F           BUY           100          9200            B8
+          S10        900017           XYZ             F          SELL           100          8900          NULL
+          S11        900018           XYZ             F          SELL           100          8900          NULL
+          S12        900019           XYZ             F          SELL           100          8900          NULL
+           B9        900020           XYZ             F           BUY            50          8900          NULL
+       3a9ca8        900020           XYZ             F          SELL            50          8900           S11
+          B10        900021           XYZ             F           BUY            50          8900          NULL
+          B11        900022           XYZ             F           BUY           100          8900          NULL
+          S13        900023           XYZ             F          SELL           100          8000          NULL
+          B12        900024           XYZ             F           BUY            10          9200          NULL
+       3aa540        900024           XYZ             F          SELL            90          8000           S13
+          B13        900025           XYZ             F           BUY            10          9200          NULL
+       3aa808        900025           XYZ             F          SELL            80          8000        3aa540
+          B14        900026           XYZ             F           BUY            10          9200          NULL
+       3aaad0        900026           XYZ             U          SELL            70          8000        3aa808
+          B15        900027           XYZ             U           BUY            10          3000          NULL
+          S14        900028           XYZ             U          SELL           100          6000          NULL
+          S15        900029           XYZ             U          SELL           100          5000          NULL
+          S16        900030           XYZ             U          SELL           100          4000          NULL
+ -------------- Executions -----------------------
+ Match Number          Time     Stock Sym           Buy          Sell        Amount         Price 
+            0        900004           XYZ            B3            S1           100          9000 
+            1        900004           XYZ            B1            S1            50          9000 
+            2        900004           XYZ            B2            S1            50          9000 
+            3        900005           XYZ        3a3b68            S2           100          9000 
+            4        900006           XYZ            B4        3a3e30           100          9000 
+            5        900009           XYZ            B5            S3            50          9200 
+            6        900010           XYZ        3a4140            S4            50          9200 
+            7        900011           XYZ            B6            S5           100          9200 
+            8        900015           XYZ            B7            S9           100          8900 
+            9        900015           XYZ            B7            S7            50          9000 
+           10        900015           XYZ            B7            S8            50          9000 
+           11        900016           XYZ            B8        3a9190           100          9000 
+           12        900017           XYZ        3a9458           S10           100          8900 
+           13        900020           XYZ            B9           S11            50          8900 
+           14        900021           XYZ           B10        3a9ca8            50          8900 
+           15        900022           XYZ           B11           S12           100          8900 
+           16        900024           XYZ           B12           S13            10          8000 
+           17        900025           XYZ           B13        3aa540            10          8000 
+           18        900026           XYZ           B14        3aa808            10          8000 
+
+TIME STAMP: 900031
+Comment:    Order S17 Sell 100 @ 30.00 Will match 10 shares with B15 and create residual for 90.
+ -------------- ORDER BOOK -----------------------
+ Order Ref Id          Time     Stock Sym        Filled      Buy/Sell        Amount         Price        Parent 
+           B1        900001           XYZ             F           BUY            50          9100          NULL
+           B2        900002           XYZ             F           BUY           150          9100          NULL
+           B3        900003           XYZ             F           BUY           100          9200          NULL
+           S1        900004           XYZ             F          SELL           200          9000          NULL
+       3a3b68        900004           XYZ             F           BUY           100          9100            B2
+           S2        900005           XYZ             F          SELL           200          9000          NULL
+       3a3e30        900005           XYZ             F          SELL           100          9000            S2
+           B4        900006           XYZ             F           BUY           100          9200          NULL
+           B5        900007           XYZ             F           BUY           100          9200          NULL
+           B6        900008           XYZ             F           BUY           100          9200          NULL
+           S3        900009           XYZ             F          SELL            50          9200          NULL
+       3a4140        900009           XYZ             F           BUY            50          9200            B5
+           S4        900010           XYZ             F          SELL            50          9200          NULL
+           S5        900011           XYZ             F          SELL           100          9200          NULL
+           S7        900012           XYZ             F          SELL            50          9000          NULL
+           S8        900013           XYZ             F          SELL           150          9000          NULL
+           S9        900014           XYZ             F          SELL           100          8900          NULL
+           B7        900015           XYZ             F           BUY           200          9200          NULL
+       3a9190        900015           XYZ             F          SELL           100          9000            S8
+           B8        900016           XYZ             F           BUY           200          9200          NULL
+       3a9458        900016           XYZ             F           BUY           100          9200            B8
+          S10        900017           XYZ             F          SELL           100          8900          NULL
+          S11        900018           XYZ             F          SELL           100          8900          NULL
+          S12        900019           XYZ             F          SELL           100          8900          NULL
+           B9        900020           XYZ             F           BUY            50          8900          NULL
+       3a9ca8        900020           XYZ             F          SELL            50          8900           S11
+          B10        900021           XYZ             F           BUY            50          8900          NULL
+          B11        900022           XYZ             F           BUY           100          8900          NULL
+          S13        900023           XYZ             F          SELL           100          8000          NULL
+          B12        900024           XYZ             F           BUY            10          9200          NULL
+       3aa540        900024           XYZ             F          SELL            90          8000           S13
+          B13        900025           XYZ             F           BUY            10          9200          NULL
+       3aa808        900025           XYZ             F          SELL            80          8000        3aa540
+          B14        900026           XYZ             F           BUY            10          9200          NULL
+       3aaad0        900026           XYZ             U          SELL            70          8000        3aa808
+          B15        900027           XYZ             F           BUY            10          3000          NULL
+          S14        900028           XYZ             U          SELL           100          6000          NULL
+          S15        900029           XYZ             U          SELL           100          5000          NULL
+          S16        900030           XYZ             U          SELL           100          4000          NULL
+          S17        900031           XYZ             F          SELL           100          3000          NULL
+       3ab498        900031           XYZ             U          SELL            90          3000           S17
+ -------------- Executions -----------------------
+ Match Number          Time     Stock Sym           Buy          Sell        Amount         Price 
+            0        900004           XYZ            B3            S1           100          9000 
+            1        900004           XYZ            B1            S1            50          9000 
+            2        900004           XYZ            B2            S1            50          9000 
+            3        900005           XYZ        3a3b68            S2           100          9000 
+            4        900006           XYZ            B4        3a3e30           100          9000 
+            5        900009           XYZ            B5            S3            50          9200 
+            6        900010           XYZ        3a4140            S4            50          9200 
+            7        900011           XYZ            B6            S5           100          9200 
+            8        900015           XYZ            B7            S9           100          8900 
+            9        900015           XYZ            B7            S7            50          9000 
+           10        900015           XYZ            B7            S8            50          9000 
+           11        900016           XYZ            B8        3a9190           100          9000 
+           12        900017           XYZ        3a9458           S10           100          8900 
+           13        900020           XYZ            B9           S11            50          8900 
+           14        900021           XYZ           B10        3a9ca8            50          8900 
+           15        900022           XYZ           B11           S12           100          8900 
+           16        900024           XYZ           B12           S13            10          8000 
+           17        900025           XYZ           B13        3aa540            10          8000 
+           18        900026           XYZ           B14        3aa808            10          8000 
+           19        900031           XYZ           B15           S17            10          3000 
+
+TIME STAMP: 900032
+Comment:    Order S18 Sell 100 @ 30.00
+ -------------- ORDER BOOK -----------------------
+ Order Ref Id          Time     Stock Sym        Filled      Buy/Sell        Amount         Price        Parent 
+           B1        900001           XYZ             F           BUY            50          9100          NULL
+           B2        900002           XYZ             F           BUY           150          9100          NULL
+           B3        900003           XYZ             F           BUY           100          9200          NULL
+           S1        900004           XYZ             F          SELL           200          9000          NULL
+       3a3b68        900004           XYZ             F           BUY           100          9100            B2
+           S2        900005           XYZ             F          SELL           200          9000          NULL
+       3a3e30        900005           XYZ             F          SELL           100          9000            S2
+           B4        900006           XYZ             F           BUY           100          9200          NULL
+           B5        900007           XYZ             F           BUY           100          9200          NULL
+           B6        900008           XYZ             F           BUY           100          9200          NULL
+           S3        900009           XYZ             F          SELL            50          9200          NULL
+       3a4140        900009           XYZ             F           BUY            50          9200            B5
+           S4        900010           XYZ             F          SELL            50          9200          NULL
+           S5        900011           XYZ             F          SELL           100          9200          NULL
+           S7        900012           XYZ             F          SELL            50          9000          NULL
+           S8        900013           XYZ             F          SELL           150          9000          NULL
+           S9        900014           XYZ             F          SELL           100          8900          NULL
+           B7        900015           XYZ             F           BUY           200          9200          NULL
+       3a9190        900015           XYZ             F          SELL           100          9000            S8
+           B8        900016           XYZ             F           BUY           200          9200          NULL
+       3a9458        900016           XYZ             F           BUY           100          9200            B8
+          S10        900017           XYZ             F          SELL           100          8900          NULL
+          S11        900018           XYZ             F          SELL           100          8900          NULL
+          S12        900019           XYZ             F          SELL           100          8900          NULL
+           B9        900020           XYZ             F           BUY            50          8900          NULL
+       3a9ca8        900020           XYZ             F          SELL            50          8900           S11
+          B10        900021           XYZ             F           BUY            50          8900          NULL
+          B11        900022           XYZ             F           BUY           100          8900          NULL
+          S13        900023           XYZ             F          SELL           100          8000          NULL
+          B12        900024           XYZ             F           BUY            10          9200          NULL
+       3aa540        900024           XYZ             F          SELL            90          8000           S13
+          B13        900025           XYZ             F           BUY            10          9200          NULL
+       3aa808        900025           XYZ             F          SELL            80          8000        3aa540
+          B14        900026           XYZ             F           BUY            10          9200          NULL
+       3aaad0        900026           XYZ             U          SELL            70          8000        3aa808
+          B15        900027           XYZ             F           BUY            10          3000          NULL
+          S14        900028           XYZ             U          SELL           100          6000          NULL
+          S15        900029           XYZ             U          SELL           100          5000          NULL
+          S16        900030           XYZ             U          SELL           100          4000          NULL
+          S17        900031           XYZ             F          SELL           100          3000          NULL
+       3ab498        900031           XYZ             U          SELL            90          3000           S17
+          S18        900032           XYZ             U          SELL           100          3000          NULL
+ -------------- Executions -----------------------
+ Match Number          Time     Stock Sym           Buy          Sell        Amount         Price 
+            0        900004           XYZ            B3            S1           100          9000 
+            1        900004           XYZ            B1            S1            50          9000 
+            2        900004           XYZ            B2            S1            50          9000 
+            3        900005           XYZ        3a3b68            S2           100          9000 
+            4        900006           XYZ            B4        3a3e30           100          9000 
+            5        900009           XYZ            B5            S3            50          9200 
+            6        900010           XYZ        3a4140            S4            50          9200 
+            7        900011           XYZ            B6            S5           100          9200 
+            8        900015           XYZ            B7            S9           100          8900 
+            9        900015           XYZ            B7            S7            50          9000 
+           10        900015           XYZ            B7            S8            50          9000 
+           11        900016           XYZ            B8        3a9190           100          9000 
+           12        900017           XYZ        3a9458           S10           100          8900 
+           13        900020           XYZ            B9           S11            50          8900 
+           14        900021           XYZ           B10        3a9ca8            50          8900 
+           15        900022           XYZ           B11           S12           100          8900 
+           16        900024           XYZ           B12           S13            10          8000 
+           17        900025           XYZ           B13        3aa540            10          8000 
+           18        900026           XYZ           B14        3aa808            10          8000 
+           19        900031           XYZ           B15           S17            10          3000 
+
+TIME STAMP: 900033
+Comment:    Order B16 Buy 560 @ 92.05 Will match all previous unfilled sells at different prices. Executions for this buy will all have different prices and be ordered according to price then time.
+ -------------- ORDER BOOK -----------------------
+ Order Ref Id          Time     Stock Sym        Filled      Buy/Sell        Amount         Price        Parent 
+           B1        900001           XYZ             F           BUY            50          9100          NULL
+           B2        900002           XYZ             F           BUY           150          9100          NULL
+           B3        900003           XYZ             F           BUY           100          9200          NULL
+           S1        900004           XYZ             F          SELL           200          9000          NULL
+       3a3b68        900004           XYZ             F           BUY           100          9100            B2
+           S2        900005           XYZ             F          SELL           200          9000          NULL
+       3a3e30        900005           XYZ             F          SELL           100          9000            S2
+           B4        900006           XYZ             F           BUY           100          9200          NULL
+           B5        900007           XYZ             F           BUY           100          9200          NULL
+           B6        900008           XYZ             F           BUY           100          9200          NULL
+           S3        900009           XYZ             F          SELL            50          9200          NULL
+       3a4140        900009           XYZ             F           BUY            50          9200            B5
+           S4        900010           XYZ             F          SELL            50          9200          NULL
+           S5        900011           XYZ             F          SELL           100          9200          NULL
+           S7        900012           XYZ             F          SELL            50          9000          NULL
+           S8        900013           XYZ             F          SELL           150          9000          NULL
+           S9        900014           XYZ             F          SELL           100          8900          NULL
+           B7        900015           XYZ             F           BUY           200          9200          NULL
+       3a9190        900015           XYZ             F          SELL           100          9000            S8
+           B8        900016           XYZ             F           BUY           200          9200          NULL
+       3a9458        900016           XYZ             F           BUY           100          9200            B8
+          S10        900017           XYZ             F          SELL           100          8900          NULL
+          S11        900018           XYZ             F          SELL           100          8900          NULL
+          S12        900019           XYZ             F          SELL           100          8900          NULL
+           B9        900020           XYZ             F           BUY            50          8900          NULL
+       3a9ca8        900020           XYZ             F          SELL            50          8900           S11
+          B10        900021           XYZ             F           BUY            50          8900          NULL
+          B11        900022           XYZ             F           BUY           100          8900          NULL
+          S13        900023           XYZ             F          SELL           100          8000          NULL
+          B12        900024           XYZ             F           BUY            10          9200          NULL
+       3aa540        900024           XYZ             F          SELL            90          8000           S13
+          B13        900025           XYZ             F           BUY            10          9200          NULL
+       3aa808        900025           XYZ             F          SELL            80          8000        3aa540
+          B14        900026           XYZ             F           BUY            10          9200          NULL
+       3aaad0        900026           XYZ             F          SELL            70          8000        3aa808
+          B15        900027           XYZ             F           BUY            10          3000          NULL
+          S14        900028           XYZ             F          SELL           100          6000          NULL
+          S15        900029           XYZ             F          SELL           100          5000          NULL
+          S16        900030           XYZ             F          SELL           100          4000          NULL
+          S17        900031           XYZ             F          SELL           100          3000          NULL
+       3ab498        900031           XYZ             F          SELL            90          3000           S17
+          S18        900032           XYZ             F          SELL           100          3000          NULL
+          B16        900033           XYZ             F           BUY           560          9205          NULL
+ -------------- Executions -----------------------
+ Match Number          Time     Stock Sym           Buy          Sell        Amount         Price 
+            0        900004           XYZ            B3            S1           100          9000 
+            1        900004           XYZ            B1            S1            50          9000 
+            2        900004           XYZ            B2            S1            50          9000 
+            3        900005           XYZ        3a3b68            S2           100          9000 
+            4        900006           XYZ            B4        3a3e30           100          9000 
+            5        900009           XYZ            B5            S3            50          9200 
+            6        900010           XYZ        3a4140            S4            50          9200 
+            7        900011           XYZ            B6            S5           100          9200 
+            8        900015           XYZ            B7            S9           100          8900 
+            9        900015           XYZ            B7            S7            50          9000 
+           10        900015           XYZ            B7            S8            50          9000 
+           11        900016           XYZ            B8        3a9190           100          9000 
+           12        900017           XYZ        3a9458           S10           100          8900 
+           13        900020           XYZ            B9           S11            50          8900 
+           14        900021           XYZ           B10        3a9ca8            50          8900 
+           15        900022           XYZ           B11           S12           100          8900 
+           16        900024           XYZ           B12           S13            10          8000 
+           17        900025           XYZ           B13        3aa540            10          8000 
+           18        900026           XYZ           B14        3aa808            10          8000 
+           19        900031           XYZ           B15           S17            10          3000 
+           20        900033           XYZ           B16        3ab498            90          3000 
+           21        900033           XYZ           B16           S18           100          3000 
+           22        900033           XYZ           B16           S16           100          4000 
+           23        900033           XYZ           B16           S15           100          5000 
+           24        900033           XYZ           B16           S14           100          6000 
+           25        900033           XYZ           B16        3aaad0            70          8000 
+
+TIME STAMP: 900034
+Comment:    Order S19 Sell 390 @ 92.05 Should not match anything since this is a different stock.
+ -------------- ORDER BOOK -----------------------
+ Order Ref Id          Time     Stock Sym        Filled      Buy/Sell        Amount         Price        Parent 
+           B1        900001           XYZ             F           BUY            50          9100          NULL
+           B2        900002           XYZ             F           BUY           150          9100          NULL
+           B3        900003           XYZ             F           BUY           100          9200          NULL
+           S1        900004           XYZ             F          SELL           200          9000          NULL
+       3a3b68        900004           XYZ             F           BUY           100          9100            B2
+           S2        900005           XYZ             F          SELL           200          9000          NULL
+       3a3e30        900005           XYZ             F          SELL           100          9000            S2
+           B4        900006           XYZ             F           BUY           100          9200          NULL
+           B5        900007           XYZ             F           BUY           100          9200          NULL
+           B6        900008           XYZ             F           BUY           100          9200          NULL
+           S3        900009           XYZ             F          SELL            50          9200          NULL
+       3a4140        900009           XYZ             F           BUY            50          9200            B5
+           S4        900010           XYZ             F          SELL            50          9200          NULL
+           S5        900011           XYZ             F          SELL           100          9200          NULL
+           S7        900012           XYZ             F          SELL            50          9000          NULL
+           S8        900013           XYZ             F          SELL           150          9000          NULL
+           S9        900014           XYZ             F          SELL           100          8900          NULL
+           B7        900015           XYZ             F           BUY           200          9200          NULL
+       3a9190        900015           XYZ             F          SELL           100          9000            S8
+           B8        900016           XYZ             F           BUY           200          9200          NULL
+       3a9458        900016           XYZ             F           BUY           100          9200            B8
+          S10        900017           XYZ             F          SELL           100          8900          NULL
+          S11        900018           XYZ             F          SELL           100          8900          NULL
+          S12        900019           XYZ             F          SELL           100          8900          NULL
+           B9        900020           XYZ             F           BUY            50          8900          NULL
+       3a9ca8        900020           XYZ             F          SELL            50          8900           S11
+          B10        900021           XYZ             F           BUY            50          8900          NULL
+          B11        900022           XYZ             F           BUY           100          8900          NULL
+          S13        900023           XYZ             F          SELL           100          8000          NULL
+          B12        900024           XYZ             F           BUY            10          9200          NULL
+       3aa540        900024           XYZ             F          SELL            90          8000           S13
+          B13        900025           XYZ             F           BUY            10          9200          NULL
+       3aa808        900025           XYZ             F          SELL            80          8000        3aa540
+          B14        900026           XYZ             F           BUY            10          9200          NULL
+       3aaad0        900026           XYZ             F          SELL            70          8000        3aa808
+          B15        900027           XYZ             F           BUY            10          3000          NULL
+          S14        900028           XYZ             F          SELL           100          6000          NULL
+          S15        900029           XYZ             F          SELL           100          5000          NULL
+          S16        900030           XYZ             F          SELL           100          4000          NULL
+          S17        900031           XYZ             F          SELL           100          3000          NULL
+       3ab498        900031           XYZ             F          SELL            90          3000           S17
+          S18        900032           XYZ             F          SELL           100          3000          NULL
+          B16        900033           XYZ             F           BUY           560          9205          NULL
+          S19        900034           YYZ             U           BUY           390          9205          NULL
+ -------------- Executions -----------------------
+ Match Number          Time     Stock Sym           Buy          Sell        Amount         Price 
+            0        900004           XYZ            B3            S1           100          9000 
+            1        900004           XYZ            B1            S1            50          9000 
+            2        900004           XYZ            B2            S1            50          9000 
+            3        900005           XYZ        3a3b68            S2           100          9000 
+            4        900006           XYZ            B4        3a3e30           100          9000 
+            5        900009           XYZ            B5            S3            50          9200 
+            6        900010           XYZ        3a4140            S4            50          9200 
+            7        900011           XYZ            B6            S5           100          9200 
+            8        900015           XYZ            B7            S9           100          8900 
+            9        900015           XYZ            B7            S7            50          9000 
+           10        900015           XYZ            B7            S8            50          9000 
+           11        900016           XYZ            B8        3a9190           100          9000 
+           12        900017           XYZ        3a9458           S10           100          8900 
+           13        900020           XYZ            B9           S11            50          8900 
+           14        900021           XYZ           B10        3a9ca8            50          8900 
+           15        900022           XYZ           B11           S12           100          8900 
+           16        900024           XYZ           B12           S13            10          8000 
+           17        900025           XYZ           B13        3aa540            10          8000 
+           18        900026           XYZ           B14        3aa808            10          8000 
+           19        900031           XYZ           B15           S17            10          3000 
+           20        900033           XYZ           B16        3ab498            90          3000 
+           21        900033           XYZ           B16           S18           100          3000 
+           22        900033           XYZ           B16           S16           100          4000 
+           23        900033           XYZ           B16           S15           100          5000 
+           24        900033           XYZ           B16           S14           100          6000 
+           25        900033           XYZ           B16        3aaad0            70          8000 
+
+TIME STAMP: 900035
+Comment:    Order B17 Buy 390 @ 92.05 Should not match anything since this is a different stock.
+ -------------- ORDER BOOK -----------------------
+ Order Ref Id          Time     Stock Sym        Filled      Buy/Sell        Amount         Price        Parent 
+           B1        900001           XYZ             F           BUY            50          9100          NULL
+           B2        900002           XYZ             F           BUY           150          9100          NULL
+           B3        900003           XYZ             F           BUY           100          9200          NULL
+           S1        900004           XYZ             F          SELL           200          9000          NULL
+       3a3b68        900004           XYZ             F           BUY           100          9100            B2
+           S2        900005           XYZ             F          SELL           200          9000          NULL
+       3a3e30        900005           XYZ             F          SELL           100          9000            S2
+           B4        900006           XYZ             F           BUY           100          9200          NULL
+           B5        900007           XYZ             F           BUY           100          9200          NULL
+           B6        900008           XYZ             F           BUY           100          9200          NULL
+           S3        900009           XYZ             F          SELL            50          9200          NULL
+       3a4140        900009           XYZ             F           BUY            50          9200            B5
+           S4        900010           XYZ             F          SELL            50          9200          NULL
+           S5        900011           XYZ             F          SELL           100          9200          NULL
+           S7        900012           XYZ             F          SELL            50          9000          NULL
+           S8        900013           XYZ             F          SELL           150          9000          NULL
+           S9        900014           XYZ             F          SELL           100          8900          NULL
+           B7        900015           XYZ             F           BUY           200          9200          NULL
+       3a9190        900015           XYZ             F          SELL           100          9000            S8
+           B8        900016           XYZ             F           BUY           200          9200          NULL
+       3a9458        900016           XYZ             F           BUY           100          9200            B8
+          S10        900017           XYZ             F          SELL           100          8900          NULL
+          S11        900018           XYZ             F          SELL           100          8900          NULL
+          S12        900019           XYZ             F          SELL           100          8900          NULL
+           B9        900020           XYZ             F           BUY            50          8900          NULL
+       3a9ca8        900020           XYZ             F          SELL            50          8900           S11
+          B10        900021           XYZ             F           BUY            50          8900          NULL
+          B11        900022           XYZ             F           BUY           100          8900          NULL
+          S13        900023           XYZ             F          SELL           100          8000          NULL
+          B12        900024           XYZ             F           BUY            10          9200          NULL
+       3aa540        900024           XYZ             F          SELL            90          8000           S13
+          B13        900025           XYZ             F           BUY            10          9200          NULL
+       3aa808        900025           XYZ             F          SELL            80          8000        3aa540
+          B14        900026           XYZ             F           BUY            10          9200          NULL
+       3aaad0        900026           XYZ             F          SELL            70          8000        3aa808
+          B15        900027           XYZ             F           BUY            10          3000          NULL
+          S14        900028           XYZ             F          SELL           100          6000          NULL
+          S15        900029           XYZ             F          SELL           100          5000          NULL
+          S16        900030           XYZ             F          SELL           100          4000          NULL
+          S17        900031           XYZ             F          SELL           100          3000          NULL
+       3ab498        900031           XYZ             F          SELL            90          3000           S17
+          S18        900032           XYZ             F          SELL           100          3000          NULL
+          B16        900033           XYZ             F           BUY           560          9205          NULL
+          S19        900034           YYZ             U           BUY           390          9205          NULL
+          B17        900035           YUL             U           BUY           390          9205          NULL
+ -------------- Executions -----------------------
+ Match Number          Time     Stock Sym           Buy          Sell        Amount         Price 
+            0        900004           XYZ            B3            S1           100          9000 
+            1        900004           XYZ            B1            S1            50          9000 
+            2        900004           XYZ            B2            S1            50          9000 
+            3        900005           XYZ        3a3b68            S2           100          9000 
+            4        900006           XYZ            B4        3a3e30           100          9000 
+            5        900009           XYZ            B5            S3            50          9200 
+            6        900010           XYZ        3a4140            S4            50          9200 
+            7        900011           XYZ            B6            S5           100          9200 
+            8        900015           XYZ            B7            S9           100          8900 
+            9        900015           XYZ            B7            S7            50          9000 
+           10        900015           XYZ            B7            S8            50          9000 
+           11        900016           XYZ            B8        3a9190           100          9000 
+           12        900017           XYZ        3a9458           S10           100          8900 
+           13        900020           XYZ            B9           S11            50          8900 
+           14        900021           XYZ           B10        3a9ca8            50          8900 
+           15        900022           XYZ           B11           S12           100          8900 
+           16        900024           XYZ           B12           S13            10          8000 
+           17        900025           XYZ           B13        3aa540            10          8000 
+           18        900026           XYZ           B14        3aa808            10          8000 
+           19        900031           XYZ           B15           S17            10          3000 
+           20        900033           XYZ           B16        3ab498            90          3000 
+           21        900033           XYZ           B16           S18           100          3000 
+           22        900033           XYZ           B16           S16           100          4000 
+           23        900033           XYZ           B16           S15           100          5000 
+           24        900033           XYZ           B16           S14           100          6000 
+           25        900033           XYZ           B16        3aaad0            70          8000 
+
+TIME STAMP: 900036
+Comment:    Order S20 Sell 390 @ 92.05 Should not match anything since this is a different stock.
+ -------------- ORDER BOOK -----------------------
+ Order Ref Id          Time     Stock Sym        Filled      Buy/Sell        Amount         Price        Parent 
+           B1        900001           XYZ             F           BUY            50          9100          NULL
+           B2        900002           XYZ             F           BUY           150          9100          NULL
+           B3        900003           XYZ             F           BUY           100          9200          NULL
+           S1        900004           XYZ             F          SELL           200          9000          NULL
+       3a3b68        900004           XYZ             F           BUY           100          9100            B2
+           S2        900005           XYZ             F          SELL           200          9000          NULL
+       3a3e30        900005           XYZ             F          SELL           100          9000            S2
+           B4        900006           XYZ             F           BUY           100          9200          NULL
+           B5        900007           XYZ             F           BUY           100          9200          NULL
+           B6        900008           XYZ             F           BUY           100          9200          NULL
+           S3        900009           XYZ             F          SELL            50          9200          NULL
+       3a4140        900009           XYZ             F           BUY            50          9200            B5
+           S4        900010           XYZ             F          SELL            50          9200          NULL
+           S5        900011           XYZ             F          SELL           100          9200          NULL
+           S7        900012           XYZ             F          SELL            50          9000          NULL
+           S8        900013           XYZ             F          SELL           150          9000          NULL
+           S9        900014           XYZ             F          SELL           100          8900          NULL
+           B7        900015           XYZ             F           BUY           200          9200          NULL
+       3a9190        900015           XYZ             F          SELL           100          9000            S8
+           B8        900016           XYZ             F           BUY           200          9200          NULL
+       3a9458        900016           XYZ             F           BUY           100          9200            B8
+          S10        900017           XYZ             F          SELL           100          8900          NULL
+          S11        900018           XYZ             F          SELL           100          8900          NULL
+          S12        900019           XYZ             F          SELL           100          8900          NULL
+           B9        900020           XYZ             F           BUY            50          8900          NULL
+       3a9ca8        900020           XYZ             F          SELL            50          8900           S11
+          B10        900021           XYZ             F           BUY            50          8900          NULL
+          B11        900022           XYZ             F           BUY           100          8900          NULL
+          S13        900023           XYZ             F          SELL           100          8000          NULL
+          B12        900024           XYZ             F           BUY            10          9200          NULL
+       3aa540        900024           XYZ             F          SELL            90          8000           S13
+          B13        900025           XYZ             F           BUY            10          9200          NULL
+       3aa808        900025           XYZ             F          SELL            80          8000        3aa540
+          B14        900026           XYZ             F           BUY            10          9200          NULL
+       3aaad0        900026           XYZ             F          SELL            70          8000        3aa808
+          B15        900027           XYZ             F           BUY            10          3000          NULL
+          S14        900028           XYZ             F          SELL           100          6000          NULL
+          S15        900029           XYZ             F          SELL           100          5000          NULL
+          S16        900030           XYZ             F          SELL           100          4000          NULL
+          S17        900031           XYZ             F          SELL           100          3000          NULL
+       3ab498        900031           XYZ             F          SELL            90          3000           S17
+          S18        900032           XYZ             F          SELL           100          3000          NULL
+          B16        900033           XYZ             F           BUY           560          9205          NULL
+          S19        900034           YYZ             U           BUY           390          9205          NULL
+          B17        900035           YUL             U           BUY           390          9205          NULL
+          S20        900036          YYXZ             U           BUY           390          9205          NULL
+ -------------- Executions -----------------------
+ Match Number          Time     Stock Sym           Buy          Sell        Amount         Price 
+            0        900004           XYZ            B3            S1           100          9000 
+            1        900004           XYZ            B1            S1            50          9000 
+            2        900004           XYZ            B2            S1            50          9000 
+            3        900005           XYZ        3a3b68            S2           100          9000 
+            4        900006           XYZ            B4        3a3e30           100          9000 
+            5        900009           XYZ            B5            S3            50          9200 
+            6        900010           XYZ        3a4140            S4            50          9200 
+            7        900011           XYZ            B6            S5           100          9200 
+            8        900015           XYZ            B7            S9           100          8900 
+            9        900015           XYZ            B7            S7            50          9000 
+           10        900015           XYZ            B7            S8            50          9000 
+           11        900016           XYZ            B8        3a9190           100          9000 
+           12        900017           XYZ        3a9458           S10           100          8900 
+           13        900020           XYZ            B9           S11            50          8900 
+           14        900021           XYZ           B10        3a9ca8            50          8900 
+           15        900022           XYZ           B11           S12           100          8900 
+           16        900024           XYZ           B12           S13            10          8000 
+           17        900025           XYZ           B13        3aa540            10          8000 
+           18        900026           XYZ           B14        3aa808            10          8000 
+           19        900031           XYZ           B15           S17            10          3000 
+           20        900033           XYZ           B16        3ab498            90          3000 
+           21        900033           XYZ           B16           S18           100          3000 
+           22        900033           XYZ           B16           S16           100          4000 
+           23        900033           XYZ           B16           S15           100          5000 
+           24        900033           XYZ           B16           S14           100          6000 
+           25        900033           XYZ           B16        3aaad0            70          8000 
+
+TIME STAMP: 900037
+Comment:    Order B18 Buy 390 @ 92.05 Should not match anything since this is a different stock.
+ -------------- ORDER BOOK -----------------------
+ Order Ref Id          Time     Stock Sym        Filled      Buy/Sell        Amount         Price        Parent 
+           B1        900001           XYZ             F           BUY            50          9100          NULL
+           B2        900002           XYZ             F           BUY           150          9100          NULL
+           B3        900003           XYZ             F           BUY           100          9200          NULL
+           S1        900004           XYZ             F          SELL           200          9000          NULL
+       3a3b68        900004           XYZ             F           BUY           100          9100            B2
+           S2        900005           XYZ             F          SELL           200          9000          NULL
+       3a3e30        900005           XYZ             F          SELL           100          9000            S2
+           B4        900006           XYZ             F           BUY           100          9200          NULL
+           B5        900007           XYZ             F           BUY           100          9200          NULL
+           B6        900008           XYZ             F           BUY           100          9200          NULL
+           S3        900009           XYZ             F          SELL            50          9200          NULL
+       3a4140        900009           XYZ             F           BUY            50          9200            B5
+           S4        900010           XYZ             F          SELL            50          9200          NULL
+           S5        900011           XYZ             F          SELL           100          9200          NULL
+           S7        900012           XYZ             F          SELL            50          9000          NULL
+           S8        900013           XYZ             F          SELL           150          9000          NULL
+           S9        900014           XYZ             F          SELL           100          8900          NULL
+           B7        900015           XYZ             F           BUY           200          9200          NULL
+       3a9190        900015           XYZ             F          SELL           100          9000            S8
+           B8        900016           XYZ             F           BUY           200          9200          NULL
+       3a9458        900016           XYZ             F           BUY           100          9200            B8
+          S10        900017           XYZ             F          SELL           100          8900          NULL
+          S11        900018           XYZ             F          SELL           100          8900          NULL
+          S12        900019           XYZ             F          SELL           100          8900          NULL
+           B9        900020           XYZ             F           BUY            50          8900          NULL
+       3a9ca8        900020           XYZ             F          SELL            50          8900           S11
+          B10        900021           XYZ             F           BUY            50          8900          NULL
+          B11        900022           XYZ             F           BUY           100          8900          NULL
+          S13        900023           XYZ             F          SELL           100          8000          NULL
+          B12        900024           XYZ             F           BUY            10          9200          NULL
+       3aa540        900024           XYZ             F          SELL            90          8000           S13
+          B13        900025           XYZ             F           BUY            10          9200          NULL
+       3aa808        900025           XYZ             F          SELL            80          8000        3aa540
+          B14        900026           XYZ             F           BUY            10          9200          NULL
+       3aaad0        900026           XYZ             F          SELL            70          8000        3aa808
+          B15        900027           XYZ             F           BUY            10          3000          NULL
+          S14        900028           XYZ             F          SELL           100          6000          NULL
+          S15        900029           XYZ             F          SELL           100          5000          NULL
+          S16        900030           XYZ             F          SELL           100          4000          NULL
+          S17        900031           XYZ             F          SELL           100          3000          NULL
+       3ab498        900031           XYZ             F          SELL            90          3000           S17
+          S18        900032           XYZ             F          SELL           100          3000          NULL
+          B16        900033           XYZ             F           BUY           560          9205          NULL
+          S19        900034           YYZ             U           BUY           390          9205          NULL
+          B17        900035           YUL             U           BUY           390          9205          NULL
+          S20        900036          YYXZ             U           BUY           390          9205          NULL
+          B18        900037          YULU             U           BUY           390          9205          NULL
+ -------------- Executions -----------------------
+ Match Number          Time     Stock Sym           Buy          Sell        Amount         Price 
+            0        900004           XYZ            B3            S1           100          9000 
+            1        900004           XYZ            B1            S1            50          9000 
+            2        900004           XYZ            B2            S1            50          9000 
+            3        900005           XYZ        3a3b68            S2           100          9000 
+            4        900006           XYZ            B4        3a3e30           100          9000 
+            5        900009           XYZ            B5            S3            50          9200 
+            6        900010           XYZ        3a4140            S4            50          9200 
+            7        900011           XYZ            B6            S5           100          9200 
+            8        900015           XYZ            B7            S9           100          8900 
+            9        900015           XYZ            B7            S7            50          9000 
+           10        900015           XYZ            B7            S8            50          9000 
+           11        900016           XYZ            B8        3a9190           100          9000 
+           12        900017           XYZ        3a9458           S10           100          8900 
+           13        900020           XYZ            B9           S11            50          8900 
+           14        900021           XYZ           B10        3a9ca8            50          8900 
+           15        900022           XYZ           B11           S12           100          8900 
+           16        900024           XYZ           B12           S13            10          8000 
+           17        900025           XYZ           B13        3aa540            10          8000 
+           18        900026           XYZ           B14        3aa808            10          8000 
+           19        900031           XYZ           B15           S17            10          3000 
+           20        900033           XYZ           B16        3ab498            90          3000 
+           21        900033           XYZ           B16           S18           100          3000 
+           22        900033           XYZ           B16           S16           100          4000 
+           23        900033           XYZ           B16           S15           100          5000 
+           24        900033           XYZ           B16           S14           100          6000 
+           25        900033           XYZ           B16        3aaad0            70          8000 

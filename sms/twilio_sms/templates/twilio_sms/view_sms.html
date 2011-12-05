@@ -1,0 +1,36 @@
+{% extends "twilio_sms/base.html" %}
+
+{% block content %}
+<div class="page-header">
+    <h1>SMS Messages</h1>
+</div>
+<p>This application was created so that participants can test if their application is sending SMS messages correctly without needing a cellphone.
+ It is also meant to help the judges test the participants software as well. The last 50 SMS messages recieved at <strong>+19176395561</strong> will displayed in the table below.</p>
+
+<table class="zebra-striped">
+    <thead>
+        <tr>
+            <th width="{% widthratio 15 100 940 %}{# 15% of 940 pixesl... #}">Date and Time</th>
+            <th width="{% widthratio 15 100 940 %}">SmsSid</th>
+            <th width="{% widthratio 15 100 940 %}">From</th>
+            <th width="{% widthratio 15 100 940 %}">To</th>
+            <th width="{% widthratio 40 100 940 %}">Body</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for message in messages %}
+        <tr>
+            <td>{{ message.created }}</td>
+            <td>{{ message.smssid }}</td>
+            <td>{{ message.from_number }}</td>
+            <td>{{ message.to_number }}</td>
+            <td>{{ message.body }}</td>
+        </tr>
+    {% empty %}
+        <tr>
+            <td colspan="5">No Messages... :(</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

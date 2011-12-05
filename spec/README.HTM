@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title>McGill 2011 Broker Application</title>
+<style type="text/css">
+th,td {text-align:left; vertical-align:text-top;}
+}
+.parameter {font-family: "Courier New", Courier, monospace }
+body { 	font-weight:normal;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:13px; }
+table,td,th
+{
+border:1px solid black;
+
+}
+table
+{
+width:100%;
+border-collapse:collapse;
+
+}
+th
+{
+height:50px;
+}
+
+
+</style>
+
+</head>
+<body>
+	<h1>Running the application</h1>
+
+<p> 
+	
+	Broker application can be used in commmand line or GUI mode. The command line 
+	mode is headless (ie no GUI is displayed). The application will dump booking 
+	and execution data to stdout in both modes. You may want to capture this data 
+	and errors to files by redirecting stdout and stderr.
+	
+	<h2>Command Line Mode</h2>
+	
+	
+	
+	Run the broker from the command line with the following parameters
+	<pre>java  -Dactors.corePoolSize=16  -cp broker.jar mcgill.codejam.exchange.broker.cli.BrokerCLI exchange_url broker_context_path broker_port number_threads data_file_path</pre>
+   Make sure to include the java runtime setting <pre>-Dactors.corePoolSize=16</pre>
+   You must supply five command line parameters 
+  
+  <table>
+  	<tr><th >Parameter</th><th>Description</th></tr>
+  	<tr><td >exchange_url</td><td>The URL at which your exchange is listening for orders. Example: <span >http://localhost:80/exchange/endpoint</span></td></tr>
+  	<tr><td >broker_context_path</td><td>The url path that you want the broker to listen. Example: /broker </td></tr>
+  	<tr><td >broker_port</td><td>The port you want the broker to listen on. Example: 1010 </td></tr>
+  	<tr><td >number_threads</td><td>Number of threads the broker will use to send orders to your exchange. Example: 5. This option is only used if you specified your orders as "Parallel" in your data file. See section on data files.</td></tr>
+  	<tr><td >data_file_path</td><td>File path to your data file. Example: c:\TEMP\YYZ.TXT </td></tr>
+  </table>
+
+  The broker will run and book all the orders in the data file. After it has booked it will wait for further commands to be entered from the keyboard. Supported commands
+  are listed below.
+  <table>
+  	<tr><th >Command</th><th>Description</th></tr>
+  	<tr><td >&lt;ENTER&gt;</td><td>Will reload the data file and rebook it.</td></tr>
+  	<tr><td >:q&lt;ENTER&gt;</td><td>Will exit the client.</td></tr>
+  </table>  
+
+
+  <h2>GUI Mode</h2>
+   Run the broker from the command line with the following classpath 
+   <pre>java  -cp broker.jar mcgill.codejam.exchange.broker.ui.BrokerUI</pre>
+   You must fill in the Configuration section with the following settings
+  <table>
+  	<tr><th >Setting</th><th>Description</th></tr>
+    <tr><td >Full URL</td><td>The URL at which your exchange is listening for orders. Example: <span >http://localhost:80/exchange/endpoint</span></td></tr>
+    <tr><td >Context path</td><td>The url path that you want the broker to listen. Example: /broker</td></tr>
+  	<tr><td >Port</td><td>The port you want the broker to listen on. Example: 1010 </td></tr>
+  	<tr><td >Threads</td><td>Number of threads the broker will use to send orders to your exchange. Example: 5. This option is only used if you specified your orders as "Parallel" in your data file. See section on data files.</td></tr>
+  	<tr><td >Orders file</td><td>File path to your data file. Example: c:\TEMP\YYZ.TXT</td></tr>
+
+  	</table>   
+   
+   To book orders to your exchange click the "Book!" button. The UI will update 
+   as the exchange accepts or rejects orders. If the broker cannot connect to 
+   the exchange it will update the "Rejected" check box after trying to send the 
+   order. As order execution messages arrive at the broker you will see them 
+   appear in the "Order executions" and "Unmatched executions" grids. Unmatched 
+   executions are executions that have an order ref id that does not appear in 
+   the "Orders" grid. When the broker receives one or more executions for an 
+   order the Executed check box will be checked for that order. When an order is 
+   only partially filled the Executed check box it will be highlighted in 
+   yellow. Once the order has been completely filled it will be highlighted in 
+   green. If the shares in all the execution messages for an order sum up to a 
+   number greater than the quantity of shares in the order the order will be 
+   highlighted in red. 
+	<h1>Data File Format</h1>
+	
+  Each order is put on a separate line. The elements of the order are 
+  <pre>
+  Buy/Sell [Stock Quantity] [Stock Symbol] @ [Price] #[Telephone Number] TW 
+  </pre>
+  
+  The twilio indicator TW is optional. If it is present then your exchange should 
+  send an SMS to the phone number for trade executions. If the orders are wrapped in the 
+  Parallel{} construct then the orders will be sent in parallel using the thread pool. 
+  If no Parallel() construct is present the orders are sent in a serial manner.
+  
+  Examples of the data file format are given below. 
+  <pre>
+  
+  
+  
+  Example 1	
+	
+  Buy 12 MS @ 12.34 #+15145551212
+  Sell 12 MS @ 12.34 #+19176395561 TW
+
+  Example 2
+  	
+  Parallel {
+  Buy 12 MS @ 12.34 #+15145551211
+  Sell 12 MS @ 12.34 #+15145551212
+  }
+
+  Example 3
+  
+  Parallel(
+  Sell 456 Pc @ 876.32 #+15145551212
+  Buy 456 Pd @ 876.32 #+15145551213
+  )
+
+	
+	
+   
+   
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title>Send Execution to Broker</title>
+</head>
+
+<body>
+<form name="input" METHOD="post" ACTION="http://localhost:9999/broker" >
+<p>
+
+Use this page to submit a trade execution message directly to the broker 
+application. Edit the ACTION url to match the port you are running the broker 
+on. This page can be useful when used with Firefox and the Firebug plugin. Make 
+sure to activate the Net and Console options in Firebug.
+
+</p>
+<table>
+
+<tr><td>Message type:</td><td> <input type="text" name="MessageType" value="E"/></td>
+<tr><td>Order Ref Id:</td><td> <input type="text" name="OrderReferenceIdentifier" value="B999"/></td>
+<tr><td>Executed shares: </td><td><input type="text" name="ExecutedShares" value="100"/></td>
+<tr><td>Execution Price:</td><td> <input type="text" name="ExecutionPrice" value="1000"/></td>
+<tr><td>Match Number:</td><td> <input type="text" name="MatchNumber" value="454"/></td>
+<tr><td>Telephone:</td><td> <input type="text" name="To" value="+7777777777"/></td>
+</table>
+<input type="submit" value="Submit" />
+</form> 
+</body>
+</html> 
+
+
+

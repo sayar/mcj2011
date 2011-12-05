@@ -1,0 +1,35 @@
+upstream django_mcjsms {
+	ip_hash;
+	server 127.0.0.1:3032;
+}
+
+server {
+    listen      80;
+    server_name sms.mcgillcodejam.com;
+    charset     utf-8;
+    access_log /var/log/nginx/access.log;
+    error_log /var/log/nginx/error.log;
+
+    # Your project's static media.
+    location /media/.git {
+		deny all;
+    }
+    location /media/ {
+      alias /home/ramisayar/public/mcj/mcj2011/media/;
+    }
+    location /static/.git {
+		deny all;
+    }
+    location /static/admin/ {
+	  alias /usr/local/lib/python2.6/dist-packages/django/contrib/admin/media/;
+    }
+    location /static/ {
+      alias /home/ramisayar/public/mcj/mcj2011/static/;
+    }
+
+    # Finally, send all non-media requests to the Django server.
+    location / {
+      uwsgi_pass  django_mcjsms;
+      include     uwsgi_params;
+    }
+  }

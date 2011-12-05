@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title>McGill 2011 Code Jam Hints</title>
+</head>
+<body>
+	<h2>Hints</h2>
+
+<p> 
+	
+	
+	This year's problem will involve web technologies. You'll need to implement an 
+	application that services HTTP requests. In addition, your application will 
+	need to make HTTP requests out to other applications on the web. The HTTP 
+	protocol will serve as an API to your application. An example of an HTTP 
+	conversation is given below. Your application should handle large numbers 
+	of simultaneous incoming HTTP requests as well as generate large numbers of 
+	outgoing requests. 
+
+
+</p>
+
+
+<p>
+	
+	Your solution will be submitted to the judges as a <a href="http://www.virtualbox.org/">virtual box</a> vm. Make sure you have 
+	Virtual Box  set up and running before the competition.
+	
+</p>
+
+<p>
+	
+	A desktop application will be provided to you to help you develop your solution. It will require the Java runtime to run. Make sure you have 
+	Sun JRE 1.6.0_25 or later installed.
+	
+</p>
+<p>
+	One person on your team should have a <a href="http://Twilio.com/">Twilio</a> account.
+</p>
+
+
+<h3>HTTP Post</h3>
+<pre>
+Content-Type: application/x-www-form-urlencoded 
+Content-Length: 148 
+Message=Hello%20World
+
+</pre>
+<h3>HTTP Response</h3>
+<pre>
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;Response&gt;
+Hello
+&lt;/Response&gt;
+
+
+</pre>

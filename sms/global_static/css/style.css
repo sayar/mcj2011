@@ -1,0 +1,23 @@
+.banner {
+    padding: 10px;
+    background-color: black;
+    margin-bottom: 10px;
+}
+.banner img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.dropdown-menu label {
+    color: #fff;
+}
+
+.dropdown-menu input {
+    width: 170px;
+    margin-right: 20px;
+}
+.dropdown-menu .btn {
+    float: right;
+    margin-right: 20px;
+}
